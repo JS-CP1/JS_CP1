@@ -15,9 +15,14 @@ def user_input():
         user_info["user_fav_color"] = input("What is your favorite color?\n").lower().strip()
     else:
         index = past_names.index(user_info["user_name"])
-        user_info["user_age"] = past_ages[index]
-        user_info["user_fav_color"] = past_fav_colors[index]
-    print(f"Hi, {user_info["user_name"]}, you are {user_info["user_age"]} years old and your favorite color is {user_info["user_fav_color"]}")
+        past_info = input("Would you like to use your past information?\n").lower().strip()
+        if past_info == "yes":
+            user_info["user_age"] = past_ages[index]
+            user_info["user_fav_color"] = past_fav_colors[index]
+        else:
+            user_info["user_age"] = input("How old are you?\n").strip()
+            user_info["user_fav_color"] = input("What is your favorite color?\n").lower().strip()
+    print(f"Hi, {user_info["user_name"]}, you are {user_info["user_age"]} years old and your favorite color is {user_info["user_fav_color"]}.")
 while code_running == "yes":
     user_input()
     past_names.append(user_info["user_name"])
