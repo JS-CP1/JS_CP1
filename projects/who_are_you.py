@@ -3,7 +3,7 @@ code_running = "yes"
 user_info = {
     "user_name": "",
     "user_age": 0,
-    "user_fav_color": "red" 
+    "user_fav_color": "" 
 }
 past_names = []
 past_ages = []
@@ -33,4 +33,4 @@ while code_running == "yes":
         exit()
     user_info["user_name"] = ""
     user_info["user_age"] = 0
-    user_info["user_fav_color"] = "red"
+    user_info["user_fav_color"] = ""
