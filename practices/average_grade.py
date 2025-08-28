@@ -11,26 +11,38 @@ while classes > 0:
 for percent in class_grades:
     average_grade += percent
 average_grade = round(average_grade/len(class_grades))
+letter_grades = ["A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"]
+letter_grade_changes = [2,2,3,2,2,3,2,2,3,1]
+letter_grade_change = 93
+key = 0
+check = True
+while check != True:
+    if letter_grade_change <= average_grade:
+        check = False
+    letter_grade_change -= letter_grade_changes[key]
+    key += 1
+letter_grade = letter_grades[key]
+print(f"Worked? {letter_grade}")
 if average_grade >= 93:
     letter_grade = "A"
-elif average_grade >= 90 and average_grade <= 92:
+elif average_grade <= 92: #2
     letter_grade = "A-"
-elif average_grade >= 87 and average_grade <= 89:
+elif average_grade <= 89: #2
     letter_grade = "B+"
-elif average_grade >= 83 and average_grade <= 86:
+elif average_grade <= 86: #3
     letter_grade = "B"
-elif average_grade >= 80 and average_grade <= 82:
+elif average_grade <= 82: #2
     letter_grade = "B-"
-elif average_grade >= 77 and average_grade <= 79:
+elif average_grade <= 79: #2
     letter_grade = "C+"
-elif average_grade >= 73 and average_grade <= 76:
+elif average_grade <= 76: #3
     letter_grade = "C"
-elif average_grade >= 70 and average_grade <= 72:
+elif average_grade <= 72: #2
     letter_grade = "C-"
-elif average_grade >= 67 and average_grade <= 69:
+elif average_grade <= 69: #2
     letter_grade = "D+"
-elif average_grade >= 65 and average_grade <= 66:
+elif average_grade <= 66: #3
     letter_grade = "D"
-elif average_grade <= 65:
+elif average_grade <= 65: #1
     letter_grade = "F"
 print(f"Your average grade is: {average_grade}, and your letter grade is a(n) {letter_grade}!")
