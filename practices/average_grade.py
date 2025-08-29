@@ -11,18 +11,6 @@ while classes > 0:
 for percent in class_grades:
     average_grade += percent
 average_grade = round(average_grade/len(class_grades))
-letter_grades = ["A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"]
-letter_grade_changes = [2,2,3,2,2,3,2,2,3,1]
-letter_grade_change = 93
-key = 0
-check = True
-while check != True:
-    if letter_grade_change <= average_grade:
-        check = False
-    letter_grade_change -= letter_grade_changes[key]
-    key += 1
-letter_grade = letter_grades[key]
-print(f"Worked? {letter_grade}")
 if average_grade >= 93:
     letter_grade = "A"
 elif average_grade <= 92: #2
@@ -45,4 +33,4 @@ elif average_grade <= 66: #3
     letter_grade = "D"
 elif average_grade <= 65: #1
     letter_grade = "F"
-print(f"Your average grade is: {average_grade}, and your letter grade is a(n) {letter_grade}!")
+print(f"Your average grade is: {average_grade}, and your overall letter grade is a(n) {letter_grade}!")
