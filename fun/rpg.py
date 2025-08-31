@@ -1,4 +1,4 @@
-#JS, 1st, rpg, FOR FUN
+#JS, 1st, rpg
 game_running = "yes"
 player_position = [1,1]
 def print_board(new_column, new_row):
