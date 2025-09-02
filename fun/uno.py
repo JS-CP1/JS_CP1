@@ -38,28 +38,30 @@ def deal_cards():
     print(bots)
 #Check if Cards are Compatible
 def compatibility(choice, top_card):
-    compatibility = False
+    global compatible
+    compatible = False
     player_cards[choice] = str(player_cards[choice])
     possibilities = ["r", "y", "g", "b", "+2", "∅", "⇄", "O", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
     if player_cards[choice] != "wild" and player_cards[choice] != "+4":
         for possible in possibilities:
             if possible in player_cards[choice] and possible in top_card:
-                compatibility = True
+                compatible = True
     else:
-        compatibility = True
-    return compatibility
+        compatible = True
+    return compatible
 def player_turn(top_card):
     print(f"Your hand is: {player_cards}")
     x = 1
-    while compatibility != True or x == 1:
+    compatible = False
+    while compatible != True or x == 1:
         x = 0
         choice = int(input("Which card would you like to play? (enter the key)\n"))
         while choice > len(player_cards):
             choice = int(input("That was not a valid card. Which card would you like to play?\n"))
         choice -= 1
         print(f"You chose {player_cards[choice]}")
-        compatibility(choice, top_card)
-        if compatibility == True:
+        compatible = compatibility(choice, top_card)
+        if compatible == True:
             print(f"The card {player_cards[choice]} is played")
             top_card = player_cards[choice]
             player_cards.pop(choice)
@@ -82,7 +84,7 @@ def round():
             turn_order.append("player")
             print(turn_order)
         elif "bot" in turns:
-            bot_num = turn_order[turns]
+            bot_num = turn_order[turns].replace("bot", "")
             bot_turn(bot_num, top_card)
 choose_bots()
 deal_cards()
