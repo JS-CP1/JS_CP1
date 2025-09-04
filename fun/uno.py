@@ -83,9 +83,8 @@ def round():
             turn_order.pop(0)
             turn_order.append("player")
             print(turn_order)
-        elif "bot" in turns:
-            bot_num = turn_order[turns].replace("bot", "")
-            bot_turn(bot_num, top_card)
+        bot_num = turn_order.index(turns)
+        bot_turn(bot_num, top_card)
 choose_bots()
 deal_cards()
 top_card = random.choice(deck)
