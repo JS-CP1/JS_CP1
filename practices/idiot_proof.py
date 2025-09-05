@@ -15,10 +15,10 @@ while True:
         print("That was not a valid gpa. Please try again.")
 phone = input("What is your phone number?\n").strip(" ").strip("-")
 invalid_characters2 = "qwertyuiopasdfghjkllzxcvbnm,.;'!@#$%^&*()~`_-+={[]}|:><"
-while len(phone) != 10 or any(char in invalid_characters2 for char in name):
+while len(phone) != 10 or any(char in invalid_characters2 for char in phone):
     phone = input("That's not a valid phone number. What is your phone number?\n").strip(" ").strip("-")
 char_phone = list(phone)
 char_phone.insert(3, ' ')
 char_phone.insert(7, ' ')
 phone_number = "".join(char_phone)
-print(f"Hi {name}, you have a gpa of {gpa} and your phone number is {phone_number}")
+print(f"Hi {name.title()}, you have a gpa of {gpa} and your phone number is {phone_number}")
