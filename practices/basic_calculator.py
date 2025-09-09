@@ -3,6 +3,7 @@
 eq_nums = ["first addend", "second addend", "subtahend", "minuend", "first multiplicand", "second multiplicand", "dividend", "divisor", "dividend", "divisor", "dividend", "modulo", "base", "exponent"]
 eq = input("What form of equation do you want to preform?\n add for addition\n min for subtraction\n mult for multiplication\n div for division\n intdiv for integer division\n mod for modulo\n exp for exponent\n").strip().lower()
 while eq != "add" and eq != "sub" and eq != "mult" and eq != "div" and eq != "intdiv" and eq != "mod" and eq != "exp":
+    print("\033c", end="")
     eq = input("That was not a valid equation. What form of equation do you want to preform?\n add for addition\n min for subtraction\n mult for multiplication\n div for division\n intdiv for integer division\n mod for modulo\n exp for exponent\n").strip().lower()
 num1 = 0
 num2 = 0
