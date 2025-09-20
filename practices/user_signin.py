@@ -1,4 +1,4 @@
-# JS, 1st, User Sign In Project
+# JS, 1st, User Sign In Practice
 info = [[input("Insert a username:\n").strip().lower(), input("Insert a password:\n").strip().lower()] for _ in range(int(input("How many accounts would you like to add?\n").strip()))]
 username, password = [input("What is your username?\n").strip().lower(), input("What is your password?\n").strip().lower()]
 for inf in info:
