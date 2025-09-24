@@ -1,6 +1,31 @@
 # JS, 1st, Letter Grade Practice
 while True:
-    percent = int(input("What is your percent grade?\n").strip().strip("$"))
-    print(f'You have a(n) {"A" if percent >= 93 else "A-" if percent >= 90 else "B+" if percent >= 87 else "B" if percent >= 83 else "B-" if percent >= 80 else "C+" if percent >= 77 else "C" if percent >= 73 else "C-" if percent >= 70 else "D+" if percent >= 67 else "D" if percent >= 65 else "F"}.',)
+    percent = int(input("What is your percent grade?\n").strip().strip("%"))
+    if percent >= 93:
+        grade = "A"
+    elif percent >= 90:
+        grade = "A-"
+    elif percent >= 87:
+        grade = "B+"
+    elif percent >= 90:
+        grade = "B"
+    elif percent >= 83:
+        grade = "B-"
+    elif percent >= 80:
+        grade = "C+"
+    elif percent >= 77:
+        grade = "C"
+    elif percent >= 73:
+        grade = "C-"
+    elif percent >= 70:
+        grade = "D+"
+    elif percent >= 67:
+        grade = "D"
+    elif percent >= 65:
+        grade = "D-"
+    else:
+        grade = "F"
+    print(f'You have a(n) {grade}.')
     again = input("Would you like to check another?\n")
-    if again == "yes": break
+    if again == "yes": 
+        break
