@@ -27,5 +27,5 @@ while True:
         grade = "F"
     print(f'You have a(n) {grade}.')
     again = input("Would you like to check another?\n")
-    if again == "yes": 
+    if again != "yes": 
         break
