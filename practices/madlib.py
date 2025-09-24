@@ -92,4 +92,4 @@ Has any… """ + lemonade + """?”
 
 Then he """ + waddle + """ed away, """ + waddle + " " + waddle + """
 Then he """ + waddle + """ed away, """ + waddle + " " + waddle + " " + waddle + """
-Then he """ + waddle + """ed away, """ + waddle + " " + waddle + """""")
+Then he """ + waddle + """ed away, """ + waddle + " " + waddle)
