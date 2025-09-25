@@ -29,3 +29,4 @@ for spec in specials:
     if spec in password:
         special = True
         score += 1
+    

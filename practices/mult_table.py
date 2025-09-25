@@ -11,11 +11,11 @@ while True:
     int_row = 0
     for _ in range(size):
         if len(column) == 1:
-            table[0].append(" " + column + " |")
+            table[0].append(f" {column} |")
         elif len(column) == 2:
-            table[0].append(column + " |")
+            table[0].append(f"{column} |")
         else:
-            table[0].append(column + "|")
+            table[0].append(f"{column}|")
         int_column += 1
         column = str(int_column).strip()
     int_row += 1
@@ -46,4 +46,5 @@ while True:
     for i in range(size + 1):
         print(*table[i])
     again = input("Would you like to do another?\n").strip().lower()
-    if again != "yes": break
+    if again != "yes": 
+        break
