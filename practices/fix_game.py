@@ -19,8 +19,8 @@ def start_game():
             print("Too high! Try again.")
         elif guess < number_to_guess:
             print("Too low! Try again.")  
-        attempts += 1 #increment attempts after every guess
-        if attempts > max_attempts: #added lose condition
+        attempts += 1 #It won't increment attempts. increment attempts after every guess
+        if attempts > max_attempts: #You can't ever lose. If you do too many attempts it will game over.
             break
         continue
     print("Game Over. Thanks for playing!")
