@@ -1,6 +1,7 @@
 # JS, 1st, Shopping List Manager Practice
 list = []
 i = 0
+i = 0
 while True:
     if i == 0:
         action = input("Enter a item\nEnter the same item again = remove from list\nstop/exit = stop program\nprint = print list.\ndone = mark something finished\n ").title().strip()
@@ -12,6 +13,7 @@ while True:
         break
     elif action == "Print": 
         print(*list)
+    elif action + "," in list:
     elif action + "," in list:
         list.pop(list.index(action + ","))
         print("Item Removed.")
