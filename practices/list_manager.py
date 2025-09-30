@@ -14,7 +14,6 @@ while True:
     elif action == "Print": 
         print(*list)
     elif action + "," in list:
-    elif action + "," in list:
         list.pop(list.index(action + ","))
         print("Item Removed.")
     elif action == "Done":
