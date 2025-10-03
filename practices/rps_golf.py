@@ -1,0 +1,1 @@
+#import random; comp = random.choice(["rock", "paper", "scissor"]); choice = input("what do you choose. (r,p,s)"); print("Win") if choice == pass
