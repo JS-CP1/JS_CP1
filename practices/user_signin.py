@@ -1,7 +1,7 @@
 # JS, 1st, User Sign In Practice
 info = []
 output = False
-for _ in range(int(input("How many accounts would you like to add?\n").strip())):
+for i in range(int(input("How many accounts would you like to add?\n").strip())):
     info.append([input("Insert a username:\n").strip().lower(), input("Insert a password:\n").strip().lower()])
 username, password = [input("What is your username?\n").strip().lower(), input("What is your password?\n").strip().lower()]
 for inf in info:
