@@ -4,17 +4,17 @@ board = ["-", "-", "-", "-", "-", "-", "-", "-", "-"]
 reference = " 0 | 1 | 2 \n---|---|---\n 3 | 4 | 5 \n---|---|---\n 6 | 7 | 8 "
 def win(turn, board):
     out = "None"
-    win = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
-    for wins in win:
-        if board[wins[0]] == board[wins[1]] == board[wins[2]] == turn:
-            out = f"{turn} won!"
+    wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
+    for win in wins:
+        if board[win[0]] == board[win[1]] == board[win[2]] == turn:
+            out = f"{turn}'s won!"
     return out
 print(f" {board[0]} | {board[1]} | {board[2]} \n---|---|---\n {board[3]} | {board[4]} | {board[5]} \n---|---|---\n {board[6]} | {board[7]} | {board[8]}\n")
 while True:
     #------PLAYER TURN------
-    inp = int(input(f"{reference}\n What number do you choose?\n "))
+    inp = int(input(f"{reference}\n Where would you like to place your X?\n "))
     while board[inp] != "-" or inp > 8 or inp < 0:
-        inp = int(input("That was not a valid input, what number do you choose?\n "))
+        inp = int(input("That was not a valid input, where would you like to place your X?\n "))
     board[inp] = "X"
     print(f" {board[0]} | {board[1]} | {board[2]} \n---|---|---\n {board[3]} | {board[4]} | {board[5]} \n---|---|---\n {board[6]} | {board[7]} | {board[8]}\n")
     #------CHECK BOARD------

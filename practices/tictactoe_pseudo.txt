@@ -1,0 +1,44 @@
+JS, 1st, Tic Tac Toe Pseudo Code
+import random
+board = list of 9 -'s for each space in the board
+reference = the board with numbers instead of - (prettyified)
+Define win function (parameters: turn, board):
+    set out to "None"
+    set wins to list with lists of each possible wins
+    floop for all items in wins:
+        if all the items in wins are equal turn
+            set out to exit message
+    set win function to out
+display the board
+loop forever (until broken):
+    ------PLAYER TURN------
+    inp = the user's choice for space
+    loop while inp is not valid:
+        inp = the user's choice for space
+    set the board's space which the user chose to an X
+    display the board
+    ------CHECK BOARD------
+      ---WIN?---
+    run win function and set it to message
+    if message does not equal "None":
+        break out of loop
+      ---TIE?---
+    set spaces to 0
+    for each item in the board
+        if the place does not equal -:
+            increment spaces by 1
+    if the number of spaces is zero:
+        set message to tie message
+        break out of loop
+    ------COMPUTER TURN------
+    set inp to a random integer number 0-8
+    loop while the random number is not valid:
+        set inp to a new random integer number (0-8)
+    set the board's space which the computer chose to an O
+    display the board
+    ------CHECK BOARD------
+      ---WIN?---
+    run win function = message
+    if message does not equal "None":
+        break out of loop
+display final message (who won)
