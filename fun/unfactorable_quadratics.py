@@ -15,7 +15,7 @@ else:
             c = math.sqrt(terms[1])
             if c == 0 and terms[1] == "x^2":
                 print("The factors of this quadratic are (x)(x)")
-            find factors of a and c
+            #find factors of a and c
     elif len(terms) == 3:
         pass
     elif len(terms) == 4:
