@@ -1,0 +1,6 @@
+Define a list of every character. (lowercases)
+Have user input choice of decode or encode
+Have user input message
+loop through every character (i) in message
+    loop through every character (x) in lowercases
+        if i equal to x:
