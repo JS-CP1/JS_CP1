@@ -1,0 +1,3 @@
+#import random; c = random.choice(["r", "p", "s"]); p = input("what do you choose? (r,p,s)\n "); print("rock", end = " ") if c == "r"  else print("paper", end = " ") if c == "p" else print("scissors", end = " "); print("vs", end = " "); print("rock", end = "") if p == "r" else print("paper", end = "") if p == "p" else print("scissors", end = ""); print(); print("Win") if c == "r" and p == "p" or c == "p" and p == "s" or c == "s" and p == "r" else print("Tie") if c == "r" and p == "r" or c == "p" and p == "p" or c == "s" and p == "s" else print("Lose") 556 characters
+
+#import random as r;c=r.choice(l:=["r","p","s"]);p=input();print(p);print(c);print("T")if c==p else print("L")if c=="p"and p=="r"or c=="s"and p=="p"or c=="r"and p=="s"else print("W") 181 characters
