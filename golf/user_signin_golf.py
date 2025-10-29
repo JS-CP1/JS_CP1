@@ -1,0 +1,1 @@
+#print("hi")if input()=="a"and input()=="b"else "" 49 characters

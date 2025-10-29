@@ -1,0 +1,1 @@
+#print(f"hi {input()}") 22 characters
