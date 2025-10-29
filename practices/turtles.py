@@ -1,39 +1,27 @@
 from turtle import *
 import random
-running = True
 teleport(500,300)
 right(90)
 forward(600)
-t1,t2,t3,t4,t5=Turtle(),Turtle(),Turtle(),Turtle(),Turtle()
-t1.teleport(-500,250)
-t1.color("red")
-t2.teleport(-500,125)
-t2.color("orange")
-t3.teleport(-500,0)
-t3.color("yellow")
-t4.teleport(-500,-125)
-t4.color("green")
-t5.teleport(-500,-250)
-t5.color("blue")
-while running==True:
-    t1.forward(random.randint(10,25))
-    t2.forward(random.randint(10,25))
-    t3.forward(random.randint(10,25))
-    t4.forward(random.randint(10,25))
-    t5.forward(random.randint(10,25))
-    if t1.xcor() > 500:
-        print("Red wins!")
-        break
-    elif t2.xcor() > 500:
-        print("Orange wins!")
-        break
-    elif t3.xcor() > 500:
-        print("Yellow wins!")
-        break
-    elif t4.xcor() > 500:
-        print("Green wins!")
-        break
-    elif t5.xcor() > 500:
-        print("Blue wins!")
-        break
-done()
+t = [Turtle() for i in range(5)]
+t[0].teleport(-500,250)
+t[0].color("red")
+t[0].shape("turtle")
+t[1].teleport(-500,125)
+t[1].color("orange")
+t[1].shape("turtle")
+t[2].teleport(-500,0)
+t[2].color("yellow")
+t[2].shape("turtle")
+t[3].teleport(-500,-125)
+t[3].color("green")
+t[3].shape("turtle")
+t[4].teleport(-500,-250)
+t[4].color("blue")
+t[4].shape("turtle")
+while True:
+    for turtle in t:
+        turtle.forward(random.randint(10,25))
+        if turtle.xcor() > 500:
+            print(f"{turtle.color()[1]} Turtle Wins!")
+            exit()
