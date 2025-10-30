@@ -1,44 +1,111 @@
 from turtle import *
-import threading
-import time
+
+# --- Setup ---
+screen = Screen()
+screen.tracer(0)
+screen.setup(800, 600)
+screen.title("Turtle Platformer")
+
+# --- Player setup ---
 player = Turtle()
-player.left(90)
+player.shape("square")
+player.color("blue")
+player.shapesize(1, 1)  # normal 20x20
+player.penup()
+player.goto(0, -230)
+
+# --- Physics ---
+gravity = -1.75
 yvel = 0
 xvel = 0
-inp = ""
+keys_pressed = set()
 
-def get_input():
-    global inp
-    while True:
-        inp = input()
+# --- Platforms ---
+platforms = []
 
-thread = threading.Thread(target=get_input, daemon=True)
-thread.start()
+def make_platform(x, y, width):
+    p = Turtle()
+    p.shape("square")
+    p.color("black")
+    p.shapesize(0.5, width / 20)
+    p.penup()
+    p.goto(x, y)
+    platforms.append((x, y, width))
+    return p
 
-while True:
-    # XVEL AND YVEL CHANGES
-    if inp == "q":
-        exit()
-    if player.ycor() <= -250:
+# Ground + Floating Platforms
+make_platform(0, -260, 600)
+make_platform(-150, -100, 150)
+make_platform(150, 0, 200)
+make_platform(0, 150, 120)
+
+# --- Input handling ---
+def key_down(key):
+    keys_pressed.add(key)
+
+def key_up(key):
+    keys_pressed.discard(key)
+
+def quit_game():
+    screen.bye()
+
+# Bind keys
+screen.listen()
+for key in ["a", "d", "w"]:
+    screen.onkeypress(lambda k=key: key_down(k), key)
+    screen.onkeyrelease(lambda k=key: key_up(k), key)
+screen.onkeypress(quit_game, "q")
+
+# --- Collision detection ---
+def check_platform_collision(old_y, new_y, px, vy):
+    """
+    Check if player crosses a platform between old_y and new_y.
+    Return the platform's y if collision occurs, otherwise None.
+    """
+    player_half_height = 10
+    for (x, y, width) in platforms:
+        half_width = width / 2
+        if abs(px - x) < half_width:
+            # Player's bottom position at old and new
+            bottom_old = old_y - player_half_height
+            bottom_new = new_y - player_half_height
+            # Check if falling through platform
+            if vy < 0 and bottom_old >= y and bottom_new <= y + 5:
+                return y + 5
+    return None
+
+# --- Game loop ---
+def game_loop():
+    global xvel, yvel
+
+    old_y = player.ycor()
+
+    # Handle input
+    if "a" in keys_pressed:
+        xvel = -10
+    elif "d" in keys_pressed:
+        xvel = 10
+    else:
+        xvel = 0
+
+    if "w" in keys_pressed and yvel == 0:
+        yvel = 35
+
+    # Apply gravity
+    yvel += gravity
+    new_y = player.ycor() + yvel
+    new_x = player.xcor() + xvel
+
+    # Check platform collisions (between old_y and new_y)
+    platform_y = check_platform_collision(old_y, new_y, new_x, yvel)
+    if platform_y is not None:
+        new_y = platform_y + 10
         yvel = 0
-    if inp == "w" and player.ycor() <= -250:
-        yvel = 25
-    if inp == "a":
-        xvel = -25
-    if inp == "d":
-        xvel = 25
 
-    # MOVING
-    if yvel >= 0:
-        player.forward(yvel)
-    else:
-        player.backward(-yvel)
-    x = player.xcor()
-    if xvel >= 0:
-        player.setx(x + xvel)
-    else:
-        player.setx(x - xvel)
+    player.goto(new_x, new_y)
+    screen.update()
+    screen.ontimer(game_loop, 20)
 
-    # RESET VARS
-    inp = ""
-    yvel -= 2
+# --- Start ---
+game_loop()
+screen.mainloop()

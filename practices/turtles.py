@@ -1,9 +1,13 @@
+#Import turtle and random
 from turtle import *
 import random
+#Create finish line
 teleport(500,300)
 right(90)
 forward(600)
+#Create 5 turtles
 t = [Turtle() for i in range(5)]
+#Set turtle stats (position, color, shape)
 t[0].teleport(-500,250)
 t[0].color("red")
 t[0].shape("turtle")
@@ -19,9 +23,14 @@ t[3].shape("turtle")
 t[4].teleport(-500,-250)
 t[4].color("blue")
 t[4].shape("turtle")
+#Loop until someone wins
 while True:
     for turtle in t:
+        #Move every turtle a random amount of steps
         turtle.forward(random.randint(10,25))
+        #Check if x coordinant is greater than finish line
         if turtle.xcor() > 500:
-            print(f"{turtle.color()[1]} Turtle Wins!")
+            #Print the turtle that won
+            print(f"{(turtle.color()[1]).title()} Turtle Wins!")
+            #Quit
             exit()
