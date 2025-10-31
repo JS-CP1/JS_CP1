@@ -57,8 +57,8 @@ platform_assigner = {
             [200, 50, 200, 10, "w"], 
             [0, 200, 150, 10, "w"], 
             [0, 400, 150, 100, "b"],
-            [450, -100, 150, 100, "b"],
-            [-450, -100, 150, 100, "b"]
+            [400, 200, 150, 100, "b"],
+            [-400, 200, 150, 100, "b"]
             ]
 }
 for platform in platform_assigner["1-1"]:
@@ -136,37 +136,27 @@ def check_horizontal_collision(old_x, new_x, py, vx):
     return (new_x, vx)
 
 
-def check_booster_collision(old_y, new_y, old_x, new_x, px, vy, vx):
-    player_half = 10
+def check_booster_collision(old_y, new_y, px, vy):
+    player_half_height = 10
     for (x, y, width, height) in boosters:
         half_width = width / 2
         # Check horizontal overlap (player center within platform half-width)
         if abs(px - x) <= half_width:
             plat_top = y + height / 2
             plat_bottom = y - height / 2
-            plat_left = x + height / 2
-            plat_right = y + height / 2
 
-            bottom_old = old_y - player_half
-            bottom_new = new_y - player_half
-            top_old = old_y + player_half
-            top_new = new_y + player_half
-            left_old = old_x - player_half
-            left_new = new_x - player_half
-            right_old = old_x + player_half
-            right_new = new_x + player_half
+            bottom_old = old_y - player_half_height
+            bottom_new = new_y - player_half_height
+            top_old = old_y + player_half_height
+            top_new = new_y + player_half_height
 
+            # Landing on top of booster (crossed the top going downward)
             if vy < 0 and bottom_old >= plat_top and bottom_new <= plat_top:
                 return ("land", plat_top)
 
+            # Hitting underside of booster (crossed the bottom going upward)
             if vy > 0 and top_old <= plat_bottom and top_new >= plat_bottom:
                 return ("head", plat_bottom)
-            
-            if vx < 0 and left_old >= plat_right and left_new <= plat_right:
-                return ("side", plat_right)
-            
-            if vx > 0 and right_old <= plat_left and right_new >= plat_left:
-                return ("side", plat_left)
 
     return (None, None)
 
@@ -207,7 +197,7 @@ def game_loop():
     new_x, xvel = check_horizontal_collision(old_x, new_x, new_y, xvel)
 
     # Check platform collisions (top and bottom)
-    collision_type, platform_y = check_platform_collision(old_y, new_y, old_x, yvel)
+    collision_type, platform_y = check_platform_collision(old_y, new_y, new_x, yvel)
     if collision_type == "land":
         new_y = platform_y + 10
         yvel = 0
@@ -218,10 +208,11 @@ def game_loop():
         on_ground = False
 
     # Check booster collisions (boosters propel the player upward instead of stopping)
-    boost_collision_type, boost_y = check_booster_collision(old_y, new_y, old_x, new_x, new_x, yvel, xvel)
-    if boost_collision_type != None:
-        yvel = 0
-        yvel += 30
+    boost_collision_type, boost_y = check_booster_collision(old_y, new_y, new_x, yvel)
+    if boost_collision_type == "head" or boost_collision_type == "land":
+        player.pendown()
+        player.penup()
+        yvel += 15
     player.goto(new_x, new_y)
     screen.update()
     screen.ontimer(game_loop, 20)
