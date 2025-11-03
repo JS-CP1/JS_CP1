@@ -9,6 +9,30 @@ screen = Screen()
 screen.setup(500,500)
 screen.title("Maze Generator")
 keys_pressed = set()
+weights1 = [30,30,10,10]
+weights2 = [10,30]
+top_exit = random.randint(1,9)
+bottom_exit = random.randint(1,9)
+
+def is_solvable(maze, exit):
+    size = len(maze[1]) - 1
+    visited = set()
+    stack = [(0,0)]
+    while stack:
+        x, y = stack.pop()
+        if x == exit and y == size:
+            return True
+        if (x,y) in visited:
+            continue
+        visited.add((x,y))
+        if x < size and maze[y][x+1] == "_":
+            stack.append((x+1, y))
+        if y < size and maze[y+1][x] == "|":
+            stack.append((x, y+1))
+        if x > 0 and maze[y][x-1] == "_":
+            stack.append((x-1,y))
+        if y > 0 and maze[y-1][x] == "|":
+            stack.append((x,y-1))
 
 def key_down(key):
     keys_pressed.add(key)
@@ -25,51 +49,40 @@ for key in ["a", "d", "w", "s"]:
     screen.onkeyrelease(lambda k=key: key_up(k), key)
 screen.onkeypress(quit_game, "q")
 
-# ⏼︎ player with |
-# ⊝︎ player with -
-# ◯︎ player with 
-# ◶︎ player with |-
-# ◶︎ player with -|
-maze = [
-    ["|-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-|"],
-    ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
-    ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
-    ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
-    ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
-    ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
-    ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
-    ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
-    ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
-    ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
-    ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
-    ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
-    ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
-    ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
-    ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
-    ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
-    ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
-    ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
-    ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
-    ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
-    ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+while True:
+    maze = [
+        ["|-", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "-|"],
+        ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
+        ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
+        ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
+        ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
+        ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
+        ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
+        ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
+        ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
+        ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
+        ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
+        ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
+        ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
+        ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
+        ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
+        ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
+        ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
+        ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
+        ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
+        ["|", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "|"],
+        ["_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_"],
 ]
-w1 = [30,30,10,10]
-w2 = [10,30]
-for r, row in enumerate(maze):
-    for c, cell in enumerate(row):
-        if cell == " ":
-            maze[r][c] = random.choices(["-", "|", "|-", "-|"], weights=w1, k=1)[0]
-        if c == 0 and r > 0 and r < 20:
-            maze[r][c] = random.choices(["|-", "|"], weights=w2, k=1)[0]
-for r, row in enumerate(maze):
-    for c, cell in enumerate(row):
-        if cell == "|-" and "-" in maze[r+1][c] and maze[r][c+1] == "|":
-            maze[r][c] = "|"
-top_exit = random.randint(1,9)
-bottom_exit = random.randint(1,9)
-maze[0][top_exit] = " "
-maze[20][bottom_exit] = " "
-start_row = 19
+    maze[0][top_exit] = " "
+    maze[20][bottom_exit] = " "
+    for x, row in enumerate(maze):
+        for y, cell in enumerate(row):
+            if cell == " ":
+                maze[x][y] = random.choices(["_", "|", "|-", "-|"], weights=weights1, k=1)[0]
+            if y == 0 and x > 0 and x < 20:
+                maze[x][y] = random.choices(["|-", "|"], weights=weights2, k=1)[0]
+    if is_solvable(maze, bottom_exit):
+        break
 player.goto(bottom_exit * 20 - 190, 190)
 
 #While on - you cannot go down.
@@ -87,7 +100,7 @@ for r, row in enumerate(maze):
     for col, cell in enumerate(row):
         walls.penup()
         walls.goto(col * 20 - 200, r * 20 - 200)
-        if cell == "-":
+        if cell == "_":
             walls.setheading(0)
             walls.pendown()
             walls.forward(20)
@@ -115,44 +128,6 @@ for r, row in enumerate(maze):
             walls.forward(20)
             walls.penup()
 walls.hideturtle()
-
-def neighbors(r, c, maze):
-    rows, cols = len(maze), len(maze[0])
-    # up
-    if r > 0 and '-' not in maze[r][c]:
-        yield r - 1, c
-    # down
-    if r + 1 < rows and '-' not in maze[r + 1][c]:
-        yield r + 1, c
-    # left
-    if c > 0 and '|' not in maze[r][c]:
-        yield r, c - 1
-    # right
-    if c + 1 < cols and '|' not in maze[r][c + 1]:
-        yield r, c + 1
-
-def reachable_from(start, maze):
-    q = deque([start])
-    seen = {start}
-    while q:
-        r, c = q.popleft()
-        for nr, nc in neighbors(r, c, maze):
-            if (nr, nc) not in seen:
-                seen.add((nr, nc))
-                q.append((nr, nc))
-    return seen
-
-# usage:
-start = (start_row, bottom_exit)            # for your code
-reachable = reachable_from(start, maze)
-all_cells = {(r, c) for r in range(len(maze)) for c in range(len(maze[0]))}
-unreachable = all_cells - reachable
-
-print("reachable:", len(reachable))
-print("unreachable components (count):", len(unreachable))
-# optionally list or inspect unreachable cells:
-if unreachable:
-    print("some unreachable cells:", list(unreachable)[:20])
 
 while True:
     if "a" in keys_pressed:
