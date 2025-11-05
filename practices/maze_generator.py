@@ -30,6 +30,7 @@ def is_solvable(maze, exit_col):
     #Loop while the queue is not empty
     while queue:
         row, col = queue.pop(0)
+        #If out end function and return True
         if row == height - 1:
             return True
         #Loop through all possible directions
@@ -37,15 +38,20 @@ def is_solvable(maze, exit_col):
             #Set two variables for direction
             next_row = row + row_change
             next_col = col + col_change
+            #If next is in maze
             if 0 <= next_row < height and 0 <= next_col < width:
-                #Check if it's at the exit
+                #Check if it's not at the exit and set the next move
                 if not visited[next_row][next_col] and maze[next_row][next_col] == " ":
-
                     visited[next_row][next_col] = True
                     queue.append((next_row, next_col))
     return False
 #Loop until a valid maze is reached.
+attempts = 0
 while True:
+    #Create a cap so it doesn't break
+    attempts += 1
+    if attempts > 9999:
+        break
     #Define the blank maze
     maze = [
         ["|-", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "-|"],
@@ -76,7 +82,7 @@ while True:
             if cell == " ":
                 maze[x][y] = random.choice(["_", "|", "|o"])
             if y == 0 and x > 0 and x < 20:
-                maze[x][y] = random.choices(["|-", "|"], weights=weights2, k=1)[0]
+                maze[x][y] = random.choices(["|-", "|"], weights = weights, k = 1)[0]
     #Set the exits
     maze[0][top_exit] = " "
     maze[20][bottom_exit] = " "
@@ -88,11 +94,13 @@ walls = Turtle()
 walls.color("black")
 walls.penup()
 walls.speed(0)
-#
+#Loop through every cell in the maze
 for r, row in enumerate(maze):
     for col, cell in enumerate(row):
         walls.penup()
+        #Go to each cell
         walls.goto(col * 20 - 200, r * 20 - 200)
+        #Draw each specific wall depending on what cell is equal to
         if cell == "_":
             walls.setheading(0)
             walls.pendown()
@@ -127,7 +135,7 @@ for r, row in enumerate(maze):
             walls.setheading(90)
             walls.forward(20)
             walls.penup()
+#Update screen and keep it open
 walls.hideturtle()
 screen.update()
 screen.mainloop()
-done()
