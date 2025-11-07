@@ -1,7 +1,7 @@
 from turtle import *
 
 CELL_SIZE = 50
-GRID_SIZE = 30
+GRID_SIZE = 50
 WINDOW_SIZE = CELL_SIZE * GRID_SIZE
 
 screen = Screen()
@@ -11,6 +11,7 @@ screen.tracer(0)
 draw = Turtle()
 draw.speed(0)
 draw.penup()
+draw.hideturtle()
 
 drawn = [["" for _ in range(CELL_SIZE)] for _ in range(CELL_SIZE)]
 
