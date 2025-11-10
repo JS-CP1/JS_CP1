@@ -10,7 +10,7 @@ infoObject = pygame.display.Info()
 SCREEN_WIDTH = infoObject.current_w
 SCREEN_HEIGHT = infoObject.current_h
 
-PLAYER_BASE_SPEED = 200
+PLAYER_BASE_SPEED = 300
 BOOST_SPEED_MULTIPLIER = 1.6 
 BOOST_COST_RATE = 100 
 INITIAL_FOOD_COUNT = 150
