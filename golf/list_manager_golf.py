@@ -1,1 +1,1 @@
-#l=[];[(lambda c:l.append(input())if c=="1"else l.remove(input())if c=="2"else print("\n".join(l))if c=="3"else exit())(input()) for _ in iter(int,1)] 149 characters
+l=[];[(lambda c:l.append(input())if c=="1"else l.remove(input())if c=="2"else print("\n".join(l))if c=="3"else exit())(input()) for _ in iter(int,1)] #149 characters
