@@ -1,4 +1,5 @@
 # JS, 1st, Order Up!
+
 #Define each dictionary with their items and values
 order = []
 sides = {
@@ -14,7 +15,7 @@ mains = {
     "Chicken Tikka Masala": 17.50
 }
 drinks = {
-    "Coca-Cola": 2.50,
+    "Coke": 2.50,
     "Iced Tea": 2.99,
     "Sparkling Water": 3.00,
     "Fresh Orange Juice": 4.50
@@ -30,17 +31,33 @@ print("Drinks:")
 for drink in drinks:
     print(f" {drink}: ${drinks[drink]:.2f}")
 
+action = input("Choose a main: ").capitalize().strip()
+while action not in mains:
+    action = input("That is not a valid menu item. Choose a main: ").capitalize().strip()
+order.append(action)
+print("Added.")
+action = input("Choose a sides: ").capitalize().strip()
+while action not in sides:
+    action = input("That is not a valid menu item. Choose a side: ").capitalize().strip()
+order.append(action)
+print("Added.")
+action = input("Choose a sides: ").capitalize().strip()
+while action not in sides:
+    action = input("That is not a valid menu item. Choose a side: ").capitalize().strip()
+order.append(action)
+print("Added.")
 # Create an infinite loop that lets the user choose 
+i = 0
 while True:
     if i == 0:
-        action = input("1: Add an item\n2:").title().strip()
+        action = input("1: Add an item\n2: Remove an item\n3: Stop or exit\n4: Print order").strip()
     else:
-        action = input("Please input your action.\n ").title().strip()
+        action = input("Please input your action.\n ").strip()
     i = 1
-    if action == "Stop" or action == "Exit":
+    if action == 3:
         print("See ya!")
         break
-    elif action == "Print":
+    elif action == 4:
         print("Your order:")
         for item in order:
             if item in sides:
@@ -52,13 +69,6 @@ while True:
     elif action + "," in order:
         order.pop(order.index(action + ","))
         print("Item Removed.")
-    elif action == "Done":
-        mark = input("Which item would you like to check off?\n ").title().strip()
-        while mark + "," not in order:
-            mark = input("That was not a valid item, try again.\n ").title().strip()
-        for index, item in enumerate(order):
-            if item == mark + ",":
-                order[index] = mark + " ✔,"
-    else: 
-        order.append(action + ",")
+    elif action == 1: 
+        order.append(action)
         print("Added.")
