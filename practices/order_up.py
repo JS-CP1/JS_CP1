@@ -1,10 +1,12 @@
 # JS, 1st, Order Up!
 
-#Define each dictionary with their items and values
+#Define variables
 order = []
+total = 0
+#Define dictionaries with each menu item
 sides = {
     "French Fries": 3.99,
-    "Side Salad": 4.50,
+    "Salad": 4.50,
     "Garlic Bread": 3.50,
     "Mashed Potatoes": 4.25
 }
@@ -22,53 +24,50 @@ drinks = {
 }
 #Print the menu
 print("------- MENU -------\nSides:")
-for side in sides:
-    print(f" {side}: ${sides[side]:.2f}")
 print("Mains:")
 for main in mains:
     print(f" {main}: ${mains[main]:.2f}")
+print("Sides:")
+for side in sides:
+    print(f" {side}: ${sides[side]:.2f}")
 print("Drinks:")
 for drink in drinks:
     print(f" {drink}: ${drinks[drink]:.2f}")
-
-action = input("Choose a main: ").capitalize().strip()
+#Allow user to choose 1 main 2 sides and 1 drink
+print("\n------- INPUTS -------")
+action = input("Choose a main: ").title().strip()
 while action not in mains:
-    action = input("That is not a valid menu item. Choose a main: ").capitalize().strip()
+    action = input("That is not a valid menu item. Choose a main: ").title()
 order.append(action)
 print("Added.")
-action = input("Choose a sides: ").capitalize().strip()
-while action not in sides:
-    action = input("That is not a valid menu item. Choose a side: ").capitalize().strip()
+for _ in range(2):
+    action = input("Choose a side: ").title().strip()
+    while action not in sides:
+        action = input("That is not a valid menu item. Choose a side: ").title().strip()
+    order.append(action)
+    print("Added.")
+action = input("Choose a drink: ").title().strip()
+while action not in drinks:
+    action = input("That is not a valid menu item. Choose a drink: ").title().strip()
 order.append(action)
 print("Added.")
-action = input("Choose a sides: ").capitalize().strip()
-while action not in sides:
-    action = input("That is not a valid menu item. Choose a side: ").capitalize().strip()
-order.append(action)
-print("Added.")
-# Create an infinite loop that lets the user choose 
-i = 0
-while True:
-    if i == 0:
-        action = input("1: Add an item\n2: Remove an item\n3: Stop or exit\n4: Print order").strip()
-    else:
-        action = input("Please input your action.\n ").strip()
-    i = 1
-    if action == 3:
-        print("See ya!")
-        break
-    elif action == 4:
-        print("Your order:")
-        for item in order:
-            if item in sides:
-                print(f" {item}: {sides[item]:.2f}")
-            elif item in mains:
-                print(f" {item}: {mains[item]:.2f}")
-            elif item in drinks:
-                print(f" {item}: {drinks[item]:.2f}")
-    elif action + "," in order:
-        order.pop(order.index(action + ","))
-        print("Item Removed.")
-    elif action == 1: 
-        order.append(action)
-        print("Added.")
+#Print the final order
+print("\n------- OUTPUT -------")
+for item in order:
+    if item in drinks:
+        print(f" Your Drink: {item}")
+for item in order:
+    if item in mains:
+        print(f" Your Main Course: {item}")
+print(" Your Side Dishes:")
+for item in order:
+    if item in sides:
+        print(f" {item}")
+for item in order:
+    if item in drinks:
+        total += drinks[item]
+    elif item in mains:
+        total += mains[item]
+    elif item in sides:
+        total += sides[item]
+print(f"Your Total Cost: ${total:.2f}")
