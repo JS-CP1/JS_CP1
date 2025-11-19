@@ -1,5 +1,3 @@
-# JS, 1st, Flexible Calculator
-
 def enter_number():
     numbers = []
     print("Enter numbers (type 'done' when finished):")
@@ -11,15 +9,10 @@ def enter_number():
             break
 
         try:
-            int(number)
+            number = float(number)
+            numbers.append(number)
         except ValueError:
-            try:
-                float(number)
-            except ValueError:
-                print("That was not a number.")
-                continue
-        
-        numbers.append(number)
+            print("That was not a number.")
 
     if len(numbers) == 0:
         print("Your list is empty.")
@@ -27,7 +20,7 @@ def enter_number():
 
     return numbers
 
-def calculate(op = "sum", *numbers):
+def calculate(op="sum", *numbers):
     result = 1
     if op == "sum":
         result = sum(numbers)
@@ -49,12 +42,12 @@ def main():
 
     numbers = enter_number()
 
-    print(f"Calculating {op} of: ", end = "")
+    print(f"Calculating {op} of: ", end="")
     for num in numbers:
-        print(num, end = ", ")
+        print(num, end=", ")
 
-    result = calculate(op, numbers)
-    print(f"Result: {result}")
+    result = calculate(op, *numbers)
+    print(f"\nResult: {result}")
 
     again = input("Would you like to perform another calculation? (yes/no) ")
     if again == "no":
