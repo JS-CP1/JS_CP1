@@ -27,7 +27,7 @@ def enter_number():
 
     return numbers
 
-def calculate(op, numbers):
+def calculate(op = "sum", *numbers):
     result = 1
     if op == "sum":
         result = sum(numbers)
@@ -46,8 +46,6 @@ def main():
     print("Avaialable Operations: sum, average, max, min, product")
 
     op = input("Which operation would you like to perform? ")
-    while op != "sum" and op != "average" and op != "max" and op != "min" and op != "product":
-        op = input("That was not a valid operation. Which operation would you like to perform? ")
 
     numbers = enter_number()
 
