@@ -10,9 +10,5 @@ squares = list(map(lambda i: (int(i)*int(i)), nums))
 for num in nums:
     print(f"Number: {num}, Squared: {squares[nums.index(num)]}")
 
-
-
 #GOLFED VERSION
-#print('\n'.join(f'{i},{int(i)*int(i)}'for i in [input()for _ in range(20)])) 76 characters
-#c is set to the user's 20 numbers
-#it then prints the number, ", ", and the squared of that number
+#print('\n'.join(f'{i},{int(i)**2}'for i in [input()for _ in range(20)])) 72 characters
