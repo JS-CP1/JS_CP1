@@ -5,11 +5,11 @@ print("Welcome user! Use this program to calculate the factorial of any valid nu
 
 #define function with argument
 def function(argument):
-    # ADDITION BY CODER: define total
+    # ADDITION BY CODER: define total (for total to be used later on it needs to be defined here)
     total = 1
-    #for i in range(1, argument) ADDITION BY CODER + 1
+    #for i in range(1, argument) ADDITION BY CODER + 1 (it wasn't fully calculating the factorial)
     for i in range(1, argument + 1):
-        #make total times i ADDITION BY CODER: *=
+        #make total times i ADDITION BY CODER: *= (it wasn't storing the result)
         total *= i
     #return the total
     return total
@@ -22,7 +22,8 @@ while True:
     try:
         if "-" not in user:
             user = int(user)
-            valid = True
+            if user < 4300:
+                valid = True
         else:
             valid = False
     except:
