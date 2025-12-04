@@ -3,7 +3,8 @@ import random
 player = {
     "wins": 0,
     "money": 500000,
-    "car": ""
+    "car": "",
+    "titles": ""
 }
 
 cars = {
@@ -42,7 +43,7 @@ cars = {
 enemies = {
     "takahashi": {"name": "Ryosuke Takahashi", "car": "Mazda RX-7 FC3S", "track": "Akagi", "skill": 9},
     "impact_blue": {"name": "Mako Sato & Sayuki", "car": "Nissan SilEighty", "track": "Usui Pass", "skill": 6},
-    "bunta": {"name": "Bunta Fujiwara", "car": "Subaru Impreza WRX STi GC8", "track": "Akina", "skill": 10},
+    "bunta": {"name": "Bunta Fujiwara", "car": "Subaru Impreza WRX STi GC8", "track": "Akina", "skill": 12},
     "takeshi": {"name": "Takeshi Nakazato", "car": "Nissan Skyline GT-R R32", "track": "Myogi", "skill": 8},
     "shingo": {"name": "Shingo Shoji", "car": "Honda Civic EG6", "track": "Myogi", "skill": 6},
     "kyoichi": {"name": "Kyoichi Sudo", "car": "Mitsubishi Lancer Evolution III", "track": "Akagi", "skill": 8},
@@ -59,26 +60,41 @@ enemies = {
     "ryo": {"name": "Ryo Shinigami", "car": "Mitsubishi Lancer Evolution VI", "track": "Tsuchisaka", "skill": 9}
 }
 
-def akina():
+def akina(player, cars, enemies):
+    akinas = []
+    for e in enemies:
+        if "Akina" == enemies[e]["track"]:
+            akinas.append(e)
+    enemy = random.choice(akinas)
+    turns = 30
+    combat(turns, enemy, player, cars, enemies)
+def akagi(player, cars, enemies):
+    akigas = []
+    for e in enemies:
+        if "Akiga" in enemies[e]["track"]:
+            akigas.append(e)
+    enemy = random.choice(akigas)
+    turns = 50
+    combat(turns, enemy, player, cars, enemies)
+def myogi(player, cars, enemies):
     pass
-def akagi():
+def usui(player, cars, enemies):
     pass
-def myogi():
+def nikko(player, cars, enemies):
     pass
-def usui():
+def shomaru(player, cars, enemies):
     pass
-def nikko():
+def tsuchisaka(player, cars, enemies):
     pass
-def shomaru():
-    pass
-def tsuchisaka():
-    pass
-def nagao():
+def nagao(player, cars, enemies):
     pass
 
-def combat(turns, enemy, player, cars):
-    order = 0 if random.choice(0, 1) == 0 else order = 1
-    print(f"You have engaged in combat with {enemy["name"]}")
+def combat(turns, enemy, player, cars, enemies):
+    if random.choice([0, 1]) == 0:
+        order = 0
+    else:
+        order = 1
+    print(f"You have engaged in combat with {enemies[enemy]["name"]}")
     while turns > 0:
         if order == 0:
             opt = input("You're approaching the turn... Would you like to review your options? (y/n) ")
@@ -96,9 +112,9 @@ def combat(turns, enemy, player, cars):
             while act != "ti" and act != "to" and act != "s" and act != "fi" and act != "fo" and act != "fs":
                 act = input("That was not a valid action. What would you like to do? ")
             # DOOOOO THE OUTCOME PLEAAASE I DONT WANT TO RIGHT NOW...
-        if cars[enemy["car"]]["hp"] > cars[player["car"]]["hp"] and order == 1:
+        if cars[enemies[enemy]["car"]]["hp"] > cars[player["car"]]["hp"] and order == 1:
             valid = True
-        elif cars[enemy["car"]]["hp"] < cars[player["car"]]["hp"] and order == 0:
+        elif cars[enemies[enemy]["car"]]["hp"] < cars[player["car"]]["hp"] and order == 0:
             valid = True
         else:
             valid = False
@@ -119,8 +135,30 @@ def combat(turns, enemy, player, cars):
                 while act != "l" and act != "r":
                     act = input("That was not a valid action. What would you like to do? ")
                 # DOOOOO THE OUTCOME PLEAAASE I DONT WANT TO RIGHT NOW...
+    main(player, cars, enemies)
 
 def main(player, cars, enemies):
-    pass
-
+    if player["wins"] >= 3:
+        print()
+    goto = input("Where would you like to go to?\n Your options are: akina, akagi, myogi, usui, nikko, shomaru, tsuchisaka, and nagao\n ")
+    while goto != "akina" and goto != "akagi" and goto != "myogi" and goto != "usui" and goto != "nikko" and goto != "shomaru" and goto != "tsuchisaka" and goto != "nagao":
+        goto = input("That's not a valid location, where would you like to go to?\n Your options are: akina, akagi, myogi, usui, nikko, shomaru, tsuchisaka, and nagao\n ")
+    if goto == "akina":
+        akina(player, cars, enemies)
+    elif goto == "akagi":
+        akagi(player, cars, enemies)
+    elif goto == "myogi":
+        myogi(player, cars, enemies)
+    elif goto == "usui":
+        usui(player, cars, enemies)
+    elif goto == "nikko":
+        nikko(player, cars, enemies)
+    elif goto == "shomaru":
+        shomaru(player, cars, enemies)
+    elif goto == "tsuchisaka":
+        tsuchisaka(player, cars, enemies)
+    elif goto == "nagao":
+        nagao(player, cars, enemies)
+    else:
+        main(player, cars, enemies)
 main(player, cars, enemies)
