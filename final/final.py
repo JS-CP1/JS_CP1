@@ -6,7 +6,6 @@ player = {
     "car": "",
     "titles": ""
 }
-
 cars = {
     "ae86": {"name": "Toyota AE86 Trueno", "tires": 40000, "grip": 5, "hp": 130},
     "fd_rx7": {"name": "Mazda RX-7 FD3S", "tires": 100000, "grip": 8, "hp": 200},
@@ -27,7 +26,7 @@ cars = {
     "silvia_s15": {"name": "Nissan Silvia S15", "tires": 95000, "grip": 8, "hp": 250},
     "skyline_r32": {"name": "Nissan Skyline GT-R R32", "tires": 140000, "grip": 10, "hp": 280},
     "skyline_r34": {"name": "Nissan Skyline GT-R R34", "tires": 160000, "grip": 10, "hp": 320},
-    "180sx": {"name": "Nissan 180SX", "tires": 85000, "grip": 7, "hp": 170},
+    "sx": {"name": "Nissan 180SX", "tires": 85000, "grip": 7, "hp": 170},
     "sil80": {"name": "Nissan SilEighty", "tires": 80000, "grip": 7, "hp": 175},
     "evo3": {"name": "Mitsubishi Lancer Evolution III", "tires": 130000, "grip": 9, "hp": 270},
     "evo4": {"name": "Mitsubishi Lancer Evolution IV", "tires": 135000, "grip": 9, "hp": 280},
@@ -39,7 +38,6 @@ cars = {
     "porsche_911": {"name": "Porsche 911 Turbo 964", "tires": 160000, "grip": 10, "hp": 320},
     "alfa_romeo_4c": {"name": "Alfa Romeo 4C", "tires": 140000, "grip": 9, "hp": 240}
 }
-
 enemies = {
     "takahashi": {"name": "Ryosuke Takahashi", "car": "Mazda RX-7 FC3S", "track": "Akagi", "skill": 9},
     "impact_blue": {"name": "Mako Sato & Sayuki", "car": "Nissan SilEighty", "track": "Usui Pass", "skill": 6},
@@ -77,17 +75,53 @@ def akagi(player, cars, enemies):
     turns = 50
     combat(turns, enemy, player, cars, enemies)
 def myogi(player, cars, enemies):
-    pass
+    myogis = []
+    for e in enemies:
+        if "Myogi" in enemies[e]["track"]:
+            myogis.append(e)
+    enemy = random.choice(myogis)
+    turns = 25
+    combat(turns, enemy, player, cars, enemies)
 def usui(player, cars, enemies):
-    pass
+    usuis = []
+    for e in enemies:
+        if "Usui" in enemies[e]["track"]:
+            usuis.append(e)
+    enemy = random.choice(usuis)
+    turns = 60
+    combat(turns, enemy, player, cars, enemies)
 def nikko(player, cars, enemies):
-    pass
+    nikkos = []
+    for e in enemies:
+        if "Nikko" in enemies[e]["track"]:
+            nikkos.append(e)
+    enemy = random.choice(nikkos)
+    turns = 25
+    combat(turns, enemy, player, cars, enemies)
 def shomaru(player, cars, enemies):
-    pass
+    shomarus = []
+    for e in enemies:
+        if "Shomaru" in enemies[e]["track"]:
+            shomarus.append(e)
+    enemy = random.choice(shomarus)
+    turns = 25
+    combat(turns, enemy, player, cars, enemies)
 def tsuchisaka(player, cars, enemies):
-    pass
+    tsuchisakas = []
+    for e in enemies:
+        if "Tsuchisaka" in enemies[e]["track"]:
+            tsuchisakas.append(e)
+    enemy = random.choice(tsuchisakas)
+    turns = 25
+    combat(turns, enemy, player, cars, enemies)
 def nagao(player, cars, enemies):
-    pass
+    nagaos = []
+    for e in enemies:
+        if "Nagao" in enemies[e]["track"]:
+            nagaos.append(e)
+    enemy = random.choice(nagaos)
+    turns = 25
+    combat(turns, enemy, player, cars, enemies)
 
 def combat(turns, enemy, player, cars, enemies):
     if random.choice([0, 1]) == 0:
@@ -161,4 +195,5 @@ def main(player, cars, enemies):
         nagao(player, cars, enemies)
     else:
         main(player, cars, enemies)
+
 main(player, cars, enemies)
