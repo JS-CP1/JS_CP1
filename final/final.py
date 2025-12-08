@@ -4,13 +4,13 @@ player = {
     "wins": 0,
     "money": 500000,
     "car": "",
+    "skill": 7.5,
     "titles": ""
 }
 cars = {
     "ae86": {"name": "Toyota AE86 Trueno", "tires": 40000, "grip": 5, "hp": 130},
     "fd_rx7": {"name": "Mazda RX-7 FD3S", "tires": 100000, "grip": 8, "hp": 200},
-    "civic": {"name": "Toyota AE86 Trueno Hatchback", "tires": 150000, "grip": 7, "hp": 190},
-    "nismo": {"name": "Toyota AE86 Trueno Hatchback", "tires": 500000, "grip": 25, "hp": 600},
+    "nismo": {"name": "nismo", "tires": 500000, "grip": 25, "hp": 600},
     "ae85": {"name": "Toyota AE85 Levin", "tires": 60000, "grip": 4, "hp": 85},
     "supra_rz": {"name": "Toyota Supra RZ", "tires": 150000, "grip": 9, "hp": 320},
     "mr2_sw20": {"name": "Toyota MR2 SW20", "tires": 90000, "grip": 7, "hp": 200},
@@ -39,23 +39,23 @@ cars = {
     "alfa_romeo_4c": {"name": "Alfa Romeo 4C", "tires": 140000, "grip": 9, "hp": 240}
 }
 enemies = {
-    "takahashi": {"name": "Ryosuke Takahashi", "car": "Mazda RX-7 FC3S", "track": "Akagi", "skill": 9},
-    "impact_blue": {"name": "Mako Sato & Sayuki", "car": "Nissan SilEighty", "track": "Usui Pass", "skill": 6},
-    "bunta": {"name": "Bunta Fujiwara", "car": "Subaru Impreza WRX STi GC8", "track": "Akina", "skill": 12},
-    "takeshi": {"name": "Takeshi Nakazato", "car": "Nissan Skyline GT-R R32", "track": "Myogi", "skill": 8},
-    "shingo": {"name": "Shingo Shoji", "car": "Honda Civic EG6", "track": "Myogi", "skill": 6},
-    "kyoichi": {"name": "Kyoichi Sudo", "car": "Mitsubishi Lancer Evolution III", "track": "Akagi", "skill": 8},
-    "seiji": {"name": "Seiji Iwaki", "car": "Mitsubishi Lancer Evolution IV", "track": "Akina", "skill": 7},
-    "hideo": {"name": "Hideo Minagawa", "car": "Toyota Supra RZ", "track": "Irohazaka", "skill": 7},
-    "kai": {"name": "Kai Kogashiwa", "car": "Toyota MR2 SW20", "track": "Irohazaka", "skill": 8},
-    "tomoyuki": {"name": "Tomoyuki Tachi", "car": "Mitsubishi Lancer Evolution V", "track": "Shomaru", "skill": 7},
-    "daiki": {"name": "Daiki Ninomiya", "car": "Honda Civic EK9 Type R", "track": "Shomaru", "skill": 7},
-    "hiroya": {"name": "Hiroya Okuyama", "car": "Nissan Silvia S15", "track": "Nagao", "skill": 7},
-    "go": {"name": "Go Hojo", "car": "Honda NSX NA1", "track": "Tsuchisaka", "skill": 9},
-    "kozo": {"name": "Kozo Hoshino", "car": "Suzuki Cappuccino EA11R", "track": "Tsuchisaka", "skill": 8},
-    "wataru": {"name": "Wataru Akiyama", "car": "Toyota AE86 Levin", "track": "Shomaru", "skill": 7},
-    "shinji": {"name": "Shinji Inui", "car": "Mazda Eunos Roadster NA6CE", "track": "Nagao", "skill": 9},
-    "ryo": {"name": "Ryo Shinigami", "car": "Mitsubishi Lancer Evolution VI", "track": "Tsuchisaka", "skill": 9}
+    "takahashi": {"name": "Ryosuke Takahashi", "car": "fc_rx7", "track": "Akagi", "skill": 9},
+    "impact_blue": {"name": "Mako Sato & Sayuki", "car": "sil80", "track": "Usui Pass", "skill": 6},
+    "bunta": {"name": "Bunta Fujiwara", "car": "impreza", "track": "Akina", "skill": 12},
+    "takeshi": {"name": "Takeshi Nakazato", "car": "skyline_r32", "track": "Myogi", "skill": 8},
+    "shingo": {"name": "Shingo Shoji", "car": "eg6_civic", "track": "Myogi", "skill": 6},
+    "kyoichi": {"name": "Kyoichi Sudo", "car": "evo3", "track": "Akagi", "skill": 8},
+    "seiji": {"name": "Seiji Iwaki", "car": "evo4", "track": "Akina", "skill": 7},
+    "hideo": {"name": "Hideo Minagawa", "car": "supra_rz", "track": "Irohazaka", "skill": 7},
+    "kai": {"name": "Kai Kogashiwa", "car": "mr2_sw20", "track": "Irohazaka", "skill": 8},
+    "tomoyuki": {"name": "Tomoyuki Tachi", "car": "evo5", "track": "Shomaru", "skill": 7},
+    "daiki": {"name": "Daiki Ninomiya", "car": "ek9_civic", "track": "Shomaru", "skill": 7},
+    "hiroya": {"name": "Hiroya Okuyama", "car": "silvia_s15", "track": "Nagao", "skill": 7},
+    "go": {"name": "Go Hojo", "car": "nsx_na1", "track": "Tsuchisaka", "skill": 9},
+    "kozo": {"name": "Kozo Hoshino", "car": "cappuccino", "track": "Tsuchisaka", "skill": 8},
+    "wataru": {"name": "Wataru Akiyama", "car": "ae86", "track": "Shomaru", "skill": 7},
+    "shinji": {"name": "Shinji Inui", "car": "roadster_na6ce", "track": "Nagao", "skill": 9},
+    "ryo": {"name": "Ryo Shinigami", "car": "evo6", "track": "Tsuchisaka", "skill": 9}
 }
 
 def akina(player, cars, enemies):
@@ -133,19 +133,47 @@ def combat(turns, enemy, player, cars, enemies):
         if order == 0:
             opt = input("You're approaching the turn... Would you like to review your options? (y/n) ")
             if opt == "yes" or opt == "y":
-                print("Defend inside (di)\nDefend outside (do)\nGive position (g)\nFeint inside (fi)\nFeint outside (fo)\nFeint give (fg)")
+                print("Defend inside (di)\nDefend outside (do)\nGive position (g)")
             act = input("What would you like to do? ")
-            while act != "di" and act != "do" and act != "g" and act != "fi" and act != "fo" and act != "fg":
+            while act != "di" and act != "do" and act != "g":
                 act = input("That was not a valid action. What would you like to do? ")
-            # DOOOOO THE OUTCOME PLEAAASE I DONT WANT TO RIGHT NOW...
+            botpass = (random.random() * 5) + (cars[enemies[enemy]["car"]]["hp"] / 100) + (cars[enemies[enemy]["car"]]["grip"] / 15) + (enemies[enemy]["skill"] / 5)
+            if act == "di":
+                if botpass > 8.5:
+                    print("Your opponent passes you...")
+                    order = 1
+                else:
+                    print("You successfully fend off your opponent...")
+            elif act == "do":
+                if botpass > 8:
+                    print("Your opponent passes you...")
+                    order = 1
+                else:
+                    print("You successfully fend off your opponent...")
+            else:
+                print("You give away your position to your opponent...")
         else:
             opt = input("You're approaching the turn... Would you like to review your options? (y/n) ")
             if opt == "yes" or opt == "y":
-                print("Take inside (ti)\nTake outside (to)\nStay (s)\nFeint inside (fi)\nFeint outside (fo)\nFeint stay (fs)")
+                print("Take inside (ti)\nTake outside (to)\nStay (s)")
             act = input("What would you like to do? ")
-            while act != "ti" and act != "to" and act != "s" and act != "fi" and act != "fo" and act != "fs":
+            while act != "ti" and act != "to" and act != "s":
                 act = input("That was not a valid action. What would you like to do? ")
-            # DOOOOO THE OUTCOME PLEAAASE I DONT WANT TO RIGHT NOW...
+            playerpass = (random.random() * 5) + (cars[player["car"]]["hp"] / 100) + (cars[player["car"]]["grip"] / 15) + (enemies[enemy]["skill"] / 5)
+            if act == "ti":
+                if playerpass > 8.5:
+                    print("Your opponent passes you...")
+                    order = 1
+                else:
+                    print("You successfully fend off your opponent...")
+            elif act == "to":
+                if playerpass > 8:
+                    print("Your opponent passes you...")
+                    order = 1
+                else:
+                    print("You successfully fend off your opponent...")
+            else:
+                print("You give away your position to your opponent...")
         if cars[enemies[enemy]["car"]]["hp"] > cars[player["car"]]["hp"] and order == 1:
             valid = True
         elif cars[enemies[enemy]["car"]]["hp"] < cars[player["car"]]["hp"] and order == 0:
@@ -156,11 +184,18 @@ def combat(turns, enemy, player, cars, enemies):
             if order == 0:
                 opt = input("You're approaching the straightaway with your opponent threatening an overtake... Would you like to review your options? (y/n) ")
                 if opt == "yes" or opt == "y":
-                    print("Defend left (l)\nDefend right (r)")
+                    print("Defend left (l)\nDefend right (r)\nGive position (g)")
                 act = input("What would you like to do? ")
                 while act != "l" and act != "r":
                     act = input("That was not a valid action. What would you like to do? ")
-                # DOOOOO THE OUTCOME PLEAAASE I DONT WANT TO RIGHT NOW...
+                if act == "l" or act == "r":
+                    if botpass > 10:
+                        print("Your opponent passes you...")
+                        order = 1
+                    else:
+                        print("You successfully fend off your opponent...")
+                else:
+                    print("You give away your position to your opponent...")
             else:
                 opt = input("You're approaching the straightaway... Would you like to review your options? (y/n) ")
                 if opt == "yes" or opt == "y":
@@ -168,7 +203,10 @@ def combat(turns, enemy, player, cars, enemies):
                 act = input("What would you like to do? ")
                 while act != "l" and act != "r":
                     act = input("That was not a valid action. What would you like to do? ")
+        turn += 1
                 # DOOOOO THE OUTCOME PLEAAASE I DONT WANT TO RIGHT NOW...
+    if order == 0:
+        print("Congratulations! You won the battle! Your skill increases and you gain 2500 yen.")
     main(player, cars, enemies)
 
 def main(player, cars, enemies):
