@@ -124,6 +124,7 @@ def nagao(player, cars, enemies):
     combat(turns, enemy, player, cars, enemies)
 
 def combat(turns, enemy, player, cars, enemies):
+    print("\033c", end="")
     if random.choice([0, 1]) == 0:
         order = 0
     else:
@@ -162,16 +163,16 @@ def combat(turns, enemy, player, cars, enemies):
             playerpass = (random.random() * 5) + (cars[player["car"]]["hp"] / 100) + (cars[player["car"]]["grip"] / 15) + (enemies[enemy]["skill"] / 5)
             if act == "ti":
                 if playerpass > 8.5:
-                    print("Your opponent passes you...")
+                    print("You succesfully pass your opponent...")
                     order = 1
                 else:
-                    print("You successfully fend off your opponent...")
+                    print("You failed to pass your opponent...")
             elif act == "to":
                 if playerpass > 8:
-                    print("Your opponent passes you...")
+                    print("You succesfully pass your opponent...")
                     order = 1
                 else:
-                    print("You successfully fend off your opponent...")
+                    print("You failed to pass your opponent...")
             else:
                 print("You give away your position to your opponent...")
         if cars[enemies[enemy]["car"]]["hp"] > cars[player["car"]]["hp"] and order == 1:
@@ -188,6 +189,7 @@ def combat(turns, enemy, player, cars, enemies):
                 act = input("What would you like to do? ")
                 while act != "l" and act != "r":
                     act = input("That was not a valid action. What would you like to do? ")
+                botpass = (random.random() * 5) + (cars[enemies[enemy]["car"]]["hp"] / 100) + (cars[enemies[enemy]["car"]]["grip"] / 15) + (enemies[enemy]["skill"] / 5)
                 if act == "l" or act == "r":
                     if botpass > 10:
                         print("Your opponent passes you...")
@@ -203,15 +205,32 @@ def combat(turns, enemy, player, cars, enemies):
                 act = input("What would you like to do? ")
                 while act != "l" and act != "r":
                     act = input("That was not a valid action. What would you like to do? ")
-        turn += 1
-                # DOOOOO THE OUTCOME PLEAAASE I DONT WANT TO RIGHT NOW...
+                playerpass = (random.random() * 5) + (cars[player["car"]]["hp"] / 100) + (cars[player["car"]]["grip"] / 15) + (enemies[enemy]["skill"] / 5)
+                if act == "ti":
+                    if playerpass > 8:
+                        print("You succesfully pass your opponent...")
+                        order = 1
+                    else:
+                        print("You failed to pass your opponent...")
+                elif act == "to":
+                    if playerpass > 8:
+                        print("You succesfully pass your opponent...")
+                        order = 1
+                    else:
+                        print("You failed to pass your opponent...")
+                else:
+                    print("You give away your position to your opponent...")
+        turns += 1
     if order == 0:
         print("Congratulations! You won the battle! Your skill increases and you gain 2500 yen.")
+        player["wins"] += 1
+    else:
+        print("welp. you lost...")
     main(player, cars, enemies)
 
 def main(player, cars, enemies):
     if player["wins"] >= 3:
-        print()
+        print("")
     goto = input("Where would you like to go to?\n Your options are: akina, akagi, myogi, usui, nikko, shomaru, tsuchisaka, and nagao\n ")
     while goto != "akina" and goto != "akagi" and goto != "myogi" and goto != "usui" and goto != "nikko" and goto != "shomaru" and goto != "tsuchisaka" and goto != "nagao":
         goto = input("That's not a valid location, where would you like to go to?\n Your options are: akina, akagi, myogi, usui, nikko, shomaru, tsuchisaka, and nagao\n ")
@@ -234,4 +253,12 @@ def main(player, cars, enemies):
     else:
         main(player, cars, enemies)
 
+print(f"These are your options for cars:")
+for car in cars:
+    print(f" {car}")
+new_car = input("What car would you like (make sure it's exactly the same)? ").strip().lower()
+while new_car not in cars:
+    new_car = input("That was not a valid car. Choose again: ").strip().lower()
+print(f"You bought a {new_car}")
+player["car"] = new_car
 main(player, cars, enemies)
