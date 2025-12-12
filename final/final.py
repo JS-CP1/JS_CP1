@@ -60,85 +60,108 @@ enemies = {
 }
 
 def akina(player, cars, enemies):
+    print("Welcome to Mount Akina.")
     akinas = []
     for e in enemies:
         if "Akina" == enemies[e]["track"]:
             akinas.append(e)
     enemy = random.choice(akinas)
-    turns = 30
+    turns = 25
     combat(turns, enemy, player, cars, enemies)
+    main(player, cars, enemies)
 def akagi(player, cars, enemies):
+    print("Welcome to Mount Akagi.")
     akagis = []
     for e in enemies:
         if "Akagi" in enemies[e]["track"]:
             akagis.append(e)
     enemy = random.choice(akagis)
-    turns = 50
+    turns = 30
     combat(turns, enemy, player, cars, enemies)
+    main(player, cars, enemies)
 def myogi(player, cars, enemies):
+    print("Welcome to Mount Myogi.")
     myogis = []
     for e in enemies:
         if "Myogi" in enemies[e]["track"]:
             myogis.append(e)
     enemy = random.choice(myogis)
-    turns = 25
+    turns = 18
     combat(turns, enemy, player, cars, enemies)
+    main(player, cars, enemies)
 def usui(player, cars, enemies):
+    print("Welcome to Usui Pass.")
     usuis = []
     for e in enemies:
         if "Usui" in enemies[e]["track"]:
             usuis.append(e)
     enemy = random.choice(usuis)
-    turns = 60
+    turns = 50
     combat(turns, enemy, player, cars, enemies)
+    main(player, cars, enemies)
 def nikko(player, cars, enemies):
+    print("Welcome to Mount Nikko.")
     nikkos = []
     for e in enemies:
         if "Nikko" in enemies[e]["track"]:
             nikkos.append(e)
     enemy = random.choice(nikkos)
-    turns = 25
+    turns = 20
     combat(turns, enemy, player, cars, enemies)
+    main(player, cars, enemies)
 def shomaru(player, cars, enemies):
+    print("Welcome to Mount Shomaru.")
     shomarus = []
     for e in enemies:
         if "Shomaru" in enemies[e]["track"]:
             shomarus.append(e)
     enemy = random.choice(shomarus)
-    turns = 25
+    turns = 20
     combat(turns, enemy, player, cars, enemies)
+    main(player, cars, enemies)
 def tsuchisaka(player, cars, enemies):
+    print("Welcome to Mount Tsuchisaka.")
     tsuchisakas = []
     for e in enemies:
         if "Tsuchisaka" in enemies[e]["track"]:
             tsuchisakas.append(e)
     enemy = random.choice(tsuchisakas)
-    turns = 25
+    turns = 15
     combat(turns, enemy, player, cars, enemies)
+    main(player, cars, enemies)
 def nagao(player, cars, enemies):
+    print("Welcome to Mount Nagao.")
     nagaos = []
     for e in enemies:
         if "Nagao" in enemies[e]["track"]:
             nagaos.append(e)
     enemy = random.choice(nagaos)
+    turns = 15
+    combat(turns, enemy, player, cars, enemies)
+    main(player, cars, enemies)
+def haruna(player, cars, enemies):
+    print("Welcome to Mount Akina.")
+    haruna = []
+    for e in enemies:
+        if "Akina" == enemies[e]["track"]:
+            haruna.append(e)
+    enemy = random.choice(haruna)
     turns = 25
     combat(turns, enemy, player, cars, enemies)
+    main(player, cars, enemies)
 
 def combat(turns, enemy, player, cars, enemies):
     if random.choice([0, 1]) == 0:
         order = 0
     else:
         order = 1
-    print(f"You have engaged in combat with {enemies[enemy]["name"]}")
+    print(f"You have engaged in combat with {enemies[enemy]["name"]} in their {cars[enemies[enemy]["car"]]["name"]}")
     while turns > 0:
         if order == 0:
-            opt = input("You're approaching the turn... Would you like to review your options? (y/n) ")
-            if opt == "yes" or opt == "y":
-                print("Defend inside (di)\nDefend outside (do)\nGive position (g)")
-            act = input("What would you like to do? ")
+            act = input("You're approaching the turn...\n Defend inside (di)\n Defend outside (do)\n Give position (g)\nWhat would you like to do? ")
             while act != "di" and act != "do" and act != "g":
                 act = input("That was not a valid action. What would you like to do? ")
-            botpass = (random.random() * 5) + (cars[enemies[enemy]["car"]]["hp"] / 100) + (cars[enemies[enemy]["car"]]["grip"] / 15) + (enemies[enemy]["skill"] / 5)
+            botpass = (random.random() * 5) + (cars[enemies[enemy]["car"]]["hp"] / 100) + (cars[enemies[enemy]["car"]]["grip"] / 15) + (enemies[enemy]["skill"] / 5) - .5
             if act == "di":
                 if botpass > 8.5:
                     print("Your opponent passes you...")
@@ -164,13 +187,13 @@ def combat(turns, enemy, player, cars, enemies):
             if act == "ti":
                 if playerpass > 8.5:
                     print("You succesfully pass your opponent...")
-                    order = 1
+                    order = 0
                 else:
                     print("You failed to pass your opponent...")
             elif act == "to":
                 if playerpass > 8:
                     print("You succesfully pass your opponent...")
-                    order = 1
+                    order = 0
                 else:
                     print("You failed to pass your opponent...")
             else:
@@ -183,44 +206,32 @@ def combat(turns, enemy, player, cars, enemies):
             valid = False
         if valid == True and order == 1 and input("Would you like to try and overtake in the straightaway (y/n) ") == "y" or valid == True and order == 0 and random.choice(0, 1) == 0:
             if order == 0:
-                opt = input("You're approaching the straightaway with your opponent threatening an overtake... Would you like to review your options? (y/n) ")
+                opt = input("You're approaching the straightaway with your opponent threatening an overtake... Would you like to review your options? (y/n) ").strip().lower()
                 if opt == "yes" or opt == "y":
                     print("Defend left (l)\nDefend right (r)\nGive position (g)")
-                act = input("What would you like to do? ")
+                act = input("What would you like to do? ").strip().lower()
                 while act != "l" and act != "r":
-                    act = input("That was not a valid action. What would you like to do? ")
-                botpass = (random.random() * 5) + (cars[enemies[enemy]["car"]]["hp"] / 100) + (cars[enemies[enemy]["car"]]["grip"] / 15) + (enemies[enemy]["skill"] / 5)
-                if act == "l" or act == "r":
-                    if botpass > 10:
-                        print("Your opponent passes you...")
-                        order = 1
-                    else:
-                        print("You successfully fend off your opponent...")
+                    act = input("That was not a valid action. What would you like to do? ").strip().lower()
+                botpass = (random.random() * 5) + (cars[enemies[enemy]["car"]]["hp"] / 100) + (cars[enemies[enemy]["car"]]["grip"] / 15) + (enemies[enemy]["skill"] / 5) - .5
+                if botpass > 10:
+                    print("Your opponent passes you...")
+                    order = 1
                 else:
-                    print("You give away your position to your opponent...")
+                    print("You successfully fend off your opponent...")
             else:
-                opt = input("You're approaching the straightaway... Would you like to review your options? (y/n) ")
+                opt = input("You're approaching the straightaway... Would you like to review your options? (y/n) ").strip().lower()
                 if opt == "yes" or opt == "y":
                     print("Take left (l)\nTake right (r)")
-                act = input("What would you like to do? ")
+                act = input("What would you like to do? ").strip().lower()
                 while act != "l" and act != "r":
-                    act = input("That was not a valid action. What would you like to do? ")
+                    act = input("That was not a valid action. What would you like to do? ").strip().lower()
                 playerpass = (random.random() * 5) + (cars[player["car"]]["hp"] / 100) + (cars[player["car"]]["grip"] / 15) + (enemies[enemy]["skill"] / 5) - player["tire_age"]
-                if act == "ti":
-                    if playerpass > 8:
-                        print("You succesfully pass your opponent...")
-                        order = 1
-                    else:
-                        print("You failed to pass your opponent...")
-                elif act == "to":
-                    if playerpass > 8:
-                        print("You succesfully pass your opponent...")
-                        order = 1
-                    else:
-                        print("You failed to pass your opponent...")
+                if playerpass > 8:
+                    print("You succesfully pass your opponent...")
+                    order = 0
                 else:
-                    print("You give away your position to your opponent...")
-        turns += 1
+                    print("You failed to pass your opponent...")
+        turns -= 1
     if order == 0:
         print("Congratulations! You won the battle! Your skill increases and you gain 25000 yen.")
         player["money"] += 25000
@@ -229,87 +240,89 @@ def combat(turns, enemy, player, cars, enemies):
         enemies[enemy]["beaten"] += 1
     else:
         print("welp. you lost...")
-    main(player, cars, enemies)
+    return player, enemies
 
 def main(player, cars, enemies):
-    akina_wins = 0
-    akagi_wins = 0
-    myogi_wins = 0
-    nikko_wins = 0
-    shomaru_wins = 0
-    tsuchi_wins = 0
-    nagao_wins = 0
-    for e in enemies:
-        if e["track"] == "Usui" and e["beaten"] > 0:
-            player["titles"].append("Usui Pass")
-        if e["track"] == "Akina" and e["beaten"] > 0:
-            akina_wins += 1
-        if akina_wins >= 2:
-            player["titles"].append("Mt. Akina")
-        if e["track"] == "Akagi" and e["beaten"] > 0:
-            akagi_wins += 1
-        if akagi_wins >= 2:
-            player["titles"].append("Mt. Akagi")
-        if e["track"] == "Myogi" and e["beaten"] > 0:
-            myogi_wins += 1
-        if myogi_wins >= 2:
-            player["titles"].append("Mt. Myogi")
-        if e["track"] == "Nikko" and e["beaten"] > 0:
-            nikko_wins += 1
-        if nikko_wins >= 2:
-            player["titles"].append("Mt. Nikko")
-        if e["track"] == "Shomaru" and e["beaten"] > 0:
-            shomaru_wins += 1
-        if shomaru_wins >= 3:
-            player["titles"].append("Mt. Shomaru")
-        if e["track"] == "Tsuchisaka" and e["beaten"] > 0:
-            tsuchi_wins += 1
-        if tsuchi_wins >= 3:
-            player["titles"].append("Mt. Tsuchisaka")
-        if e["track"] == "Nagao" and e["beaten"] > 0:
-            nagao_wins += 1
-        if nagao_wins >= 2:
-            player["titles"].append("Mt. Nagao")
-    if len(player["titles"]) >= 3:
-        keep = input("You won! Would you like to keep playing? (yes/no)")
-        if keep == "no":
-            exit()
-    act = input(f"Would you like to buy new tires or a new car? Your money: {player['money']} (tires/car/no)")
-    if act == "tires":
-        print(f"You spent {cars[player["car"]]["tires"]}")
-    elif act == "car":
-        print(f"These are your options for cars:")
-        for car in cars:
-            print(f" {car}; {car["price"]}")
-        new_car = input("What car would you like? (make sure it's exactly the same) ").strip().lower()
-        while new_car not in cars or player["money"] < cars[new_car]["price"]:
-            if new_car not in cars:
-                new_car = input("That was not a valid car. Choose again: ").strip().lower()
+    while True:
+        akina_wins = 0
+        akagi_wins = 0
+        myogi_wins = 0
+        nikko_wins = 0
+        shomaru_wins = 0
+        tsuchi_wins = 0
+        nagao_wins = 0
+        for e in enemies:
+            if enemies[e]["track"] == "Usui" and enemies[e]["beaten"] > 0:
+                player["titles"].append("Usui Pass")
+            if enemies[e]["track"] == "Akina" and enemies[e]["beaten"] > 0:
+                akina_wins += 1
+            if akina_wins >= 2:
+                player["titles"].append("Mt. Akina")
+            if enemies[e]["track"] == "Akagi" and enemies[e]["beaten"] > 0:
+                akagi_wins += 1
+            if akagi_wins >= 2:
+                player["titles"].append("Mt. Akagi")
+            if enemies[e]["track"] == "Myogi" and enemies[e]["beaten"] > 0:
+                myogi_wins += 1
+            if myogi_wins >= 2:
+                player["titles"].append("Mt. Myogi")
+            if enemies[e]["track"] == "Nikko" and enemies[e]["beaten"] > 0:
+                nikko_wins += 1
+            if nikko_wins >= 2:
+                player["titles"].append("Mt. Nikko")
+            if enemies[e]["track"] == "Shomaru" and enemies[e]["beaten"] > 0:
+                shomaru_wins += 1
+            if shomaru_wins >= 3:
+                player["titles"].append("Mt. Shomaru")
+            if enemies[e]["track"] == "Tsuchisaka" and enemies[e]["beaten"] > 0:
+                tsuchi_wins += 1
+            if tsuchi_wins >= 3:
+                player["titles"].append("Mt. Tsuchisaka")
+            if enemies[e]["track"] == "Nagao" and enemies[e]["beaten"] > 0:
+                nagao_wins += 1
+            if nagao_wins >= 2:
+                player["titles"].append("Mt. Nagao")
+        if len(player["titles"]) >= 3:
+            keep = input("You won! Would you like to keep playing? (yes/no)").strip().lower()
+            if keep == "yes":
+                pass
             else:
-                new_car = input("You do not have enough money for that car. Choose again: ")
-        print(f"You bought a {new_car}")
-        player["car"] = new_car
-    goto = input("Where would you like to go to?\n Your options are: akina, akagi, myogi, usui, nikko, shomaru, tsuchisaka, and nagao\n ")
-    while goto != "akina" and goto != "akagi" and goto != "myogi" and goto != "usui" and goto != "nikko" and goto != "shomaru" and goto != "tsuchisaka" and goto != "nagao":
-        goto = input("That's not a valid location, where would you like to go to?\n Your options are: akina, akagi, myogi, usui, nikko, shomaru, tsuchisaka, and nagao\n ")
-    if goto == "akina":
-        akina(player, cars, enemies)
-    elif goto == "akagi":
-        akagi(player, cars, enemies)
-    elif goto == "myogi":
-        myogi(player, cars, enemies)
-    elif goto == "usui":
-        usui(player, cars, enemies)
-    elif goto == "nikko":
-        nikko(player, cars, enemies)
-    elif goto == "shomaru":
-        shomaru(player, cars, enemies)
-    elif goto == "tsuchisaka":
-        tsuchisaka(player, cars, enemies)
-    elif goto == "nagao":
-        nagao(player, cars, enemies)
-    else:
-        main(player, cars, enemies)
+                break
+        act = input(f"Would you like to buy new tires or a new car? Your money: {player['money']} (tires/car/no) ").strip().lower()
+        if act == "tires":
+            print(f"You spent {cars[player["car"]]["tires"]} on new tires.")
+        elif act == "car":
+            print(f"These are your options for cars:")
+            for car in cars:
+                print(f" {car}; {car["price"]}")
+            new_car = input("What car would you like? (make sure it's exactly the same) ").strip().lower()
+            while new_car not in cars or player["money"] < cars[new_car]["price"]:
+                if new_car not in cars:
+                    new_car = input("That was not a valid car. Choose again: ").strip().lower()
+                else:
+                    new_car = input("You do not have enough money for that car. Choose again: ").strip().lower()
+            print(f"You bought a(n) {new_car}")
+            player["car"] = new_car
+        goto = input("Where would you like to go to?\n Your options are: akina, akagi, myogi, usui, nikko, shomaru, tsuchisaka, and nagao\n ").strip().lower()
+        while goto != "akina" and goto != "akagi" and goto != "myogi" and goto != "usui" and goto != "nikko" and goto != "shomaru" and goto != "tsuchisaka" and goto != "nagao":
+            goto = input("That's not a valid location, where would you like to go to?\n Your options are: akina, akagi, myogi, usui, nikko, shomaru, tsuchisaka, and nagao\n ").strip().lower()
+        if goto == "akina":
+            akina(player, cars, enemies)
+        elif goto == "akagi":
+            akagi(player, cars, enemies)
+        elif goto == "myogi":
+            myogi(player, cars, enemies)
+        elif goto == "usui":
+            usui(player, cars, enemies)
+        elif goto == "nikko":
+            nikko(player, cars, enemies)
+        elif goto == "shomaru":
+            shomaru(player, cars, enemies)
+        elif goto == "tsuchisaka":
+            tsuchisaka(player, cars, enemies)
+        elif goto == "nagao":
+            nagao(player, cars, enemies)
+    print("Thank you for playing.")
 
 print(f"These are your options for cars:")
 for car in cars:
@@ -317,6 +330,6 @@ for car in cars:
 new_car = input("What car would you like? (make sure it's exactly the same) ").strip().lower()
 while new_car not in cars:
     new_car = input("That was not a valid car. Choose again: ").strip().lower()
-print(f"You bought a {new_car}")
+print(f"You bought a(n) {new_car}")
 player["car"] = new_car
 main(player, cars, enemies)
