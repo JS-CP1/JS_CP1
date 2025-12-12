@@ -158,9 +158,10 @@ def combat(turns, enemy, player, cars, enemies):
     print(f"You have engaged in combat with {enemies[enemy]["name"]} in their {cars[enemies[enemy]["car"]]["name"]}")
     while turns > 0:
         if order == 0:
-            act = input("You're approaching the turn...\n Defend inside (di)\n Defend outside (do)\n Give position (g)\nWhat would you like to do? ")
+            act = input("You're approaching the turn...\n Defend inside (di)\n Defend outside (do)\n Give position (g)\nWhat would you like to do? ").strip().lower()
             while act != "di" and act != "do" and act != "g":
                 act = input("That was not a valid action. What would you like to do? ")
+            print("\033c", end="")
             botpass = (random.random() * 5) + (cars[enemies[enemy]["car"]]["hp"] / 100) + (cars[enemies[enemy]["car"]]["grip"] / 15) + (enemies[enemy]["skill"] / 5) - .5
             if act == "di":
                 if botpass > 8.5:
@@ -177,12 +178,10 @@ def combat(turns, enemy, player, cars, enemies):
             else:
                 print("You give away your position to your opponent...")
         else:
-            opt = input("You're approaching the turn... Would you like to review your options? (y/n) ")
-            if opt == "yes" or opt == "y":
-                print("Take inside (ti)\nTake outside (to)\nStay (s)")
-            act = input("What would you like to do? ")
+            act = input("You're approaching the turn...\n Take inside (ti)\n Take outside (to)\n Stay (s)\nWhat would you like to do? ").strip().lower()
             while act != "ti" and act != "to" and act != "s":
                 act = input("That was not a valid action. What would you like to do? ")
+            print("\033c", end="")
             playerpass = (random.random() * 5) + (cars[player["car"]]["hp"] / 100) + (cars[player["car"]]["grip"] / 15) + (enemies[enemy]["skill"] / 5) - player["tire_age"]
             if act == "ti":
                 if playerpass > 8.5:
@@ -206,12 +205,11 @@ def combat(turns, enemy, player, cars, enemies):
             valid = False
         if valid == True and order == 1 and input("Would you like to try and overtake in the straightaway (y/n) ") == "y" or valid == True and order == 0 and random.choice([0, 1]) == 0:
             if order == 0:
-                opt = input("You're approaching the straightaway with your opponent threatening an overtake... Would you like to review your options? (y/n) ").strip().lower()
-                if opt == "yes" or opt == "y":
-                    print("Defend left (l)\nDefend right (r)\nGive position (g)")
-                act = input("What would you like to do? ").strip().lower()
-                while act != "l" and act != "r":
+                print("Your opponent is attempting to overtake...")
+                act = input("You're approaching the straightaway...\n Defend left (l)\n Defend right (r)\n Give position (g)\nWhat would you like to do? ").strip().lower()
+                while act != "l" and act != "r" and act != "g":
                     act = input("That was not a valid action. What would you like to do? ").strip().lower()
+                print("\033c", end="")
                 botpass = (random.random() * 5) + (cars[enemies[enemy]["car"]]["hp"] / 100) + (cars[enemies[enemy]["car"]]["grip"] / 15) + (enemies[enemy]["skill"] / 5) - .5
                 if botpass > 10:
                     print("Your opponent passes you...")
@@ -219,12 +217,10 @@ def combat(turns, enemy, player, cars, enemies):
                 else:
                     print("You successfully fend off your opponent...")
             else:
-                opt = input("You're approaching the straightaway... Would you like to review your options? (y/n) ").strip().lower()
-                if opt == "yes" or opt == "y":
-                    print("Take left (l)\nTake right (r)")
-                act = input("What would you like to do? ").strip().lower()
+                act = input("You're approaching the straightaway...\n Attack left (l)\n Attack right (r)\nWhat would you like to do? ").strip().lower()
                 while act != "l" and act != "r":
                     act = input("That was not a valid action. What would you like to do? ").strip().lower()
+                print("\033c", end="")
                 playerpass = (random.random() * 5) + (cars[player["car"]]["hp"] / 100) + (cars[player["car"]]["grip"] / 15) + (enemies[enemy]["skill"] / 5) - player["tire_age"]
                 if playerpass > 8:
                     print("You succesfully pass your opponent...")
@@ -326,10 +322,15 @@ def main(player, cars, enemies):
 
 print(f"These are your options for cars:")
 for car in cars:
-    print(f" {car}")
-new_car = input("What car would you like? (make sure it's exactly the same) ").strip().lower()
-while new_car not in cars:
-    new_car = input("That was not a valid car. Choose again: ").strip().lower()
+    print(f" {cars[car]["name"]}")
+new_car = input("What car would you like? (make sure it's exactly the same) ").strip()
+valid = False
+while not valid:
+    try:
+        new_car = cars[new_car]["name"]
+        valid = True
+    except:
+        new_car = input("That was not a valid car, choose again: ").strip()
 print(f"You bought a(n) {new_car}")
 player["car"] = new_car
 main(player, cars, enemies)
