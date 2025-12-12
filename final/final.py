@@ -204,7 +204,7 @@ def combat(turns, enemy, player, cars, enemies):
             valid = True
         else:
             valid = False
-        if valid == True and order == 1 and input("Would you like to try and overtake in the straightaway (y/n) ") == "y" or valid == True and order == 0 and random.choice(0, 1) == 0:
+        if valid == True and order == 1 and input("Would you like to try and overtake in the straightaway (y/n) ") == "y" or valid == True and order == 0 and random.choice([0, 1]) == 0:
             if order == 0:
                 opt = input("You're approaching the straightaway with your opponent threatening an overtake... Would you like to review your options? (y/n) ").strip().lower()
                 if opt == "yes" or opt == "y":
