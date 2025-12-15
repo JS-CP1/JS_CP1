@@ -322,15 +322,10 @@ def main(player, cars, enemies):
 
 print(f"These are your options for cars:")
 for car in cars:
-    print(f" {cars[car]["name"]}")
-new_car = input("What car would you like? (make sure it's exactly the same) ").strip()
-valid = False
-while not valid:
-    try:
-        new_car = cars[new_car]["name"]
-        valid = True
-    except:
-        new_car = input("That was not a valid car, choose again: ").strip()
+    print(f" {car}")
+new_car = input("What car would you like? (make sure it's exactly the same) ").strip().lower()
+while new_car not in cars:
+    new_car = input("That was not a valid car, what car would you like? ").strip().lower()
 print(f"You bought a(n) {new_car}")
 player["car"] = new_car
 main(player, cars, enemies)
