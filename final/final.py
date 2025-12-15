@@ -69,7 +69,7 @@ def akina(player, cars, enemies):
     turns = 25
     player, enemies = combat(turns, enemy, player, cars, enemies)
     if player["car"] != "supra_rz":
-        inp = input("You beat me? Here's a supra if you want it. (y/n)")
+        inp = input("Well, I don't really care the result. Here's a supra if you want it. (y/n) ")
         if inp == "y":
             player["car"] = "supra_rz"
     return player, enemies
@@ -83,7 +83,7 @@ def akagi(player, cars, enemies):
     turns = 30
     player, enemies = combat(turns, enemy, player, cars, enemies)
     if player["car"] != "180sx":
-        inp = input("You beat me? Here's a 180sx if you want it. (y/n)")
+        inp = input("Well, I don't really care the result. Here's a 180sx if you want it. (y/n) ")
         if inp == "y":
             player["car"] = "180sx"
     return player, enemies
@@ -97,7 +97,7 @@ def myogi(player, cars, enemies):
     turns = 18
     player, enemies = combat(turns, enemy, player, cars, enemies)
     if player["car"] != "evo5":
-        inp = input("You beat me? Here's a evo if you want it. (y/n)")
+        inp = input("Well, I don't really care the result. Here's a evo if you want it. (y/n) ")
         if inp == "y":
             player["car"] = "evo5"
     return player, enemies
@@ -111,7 +111,7 @@ def usui(player, cars, enemies):
     turns = 50
     player, enemies = combat(turns, enemy, player, cars, enemies)
     if player["car"] != "skyline_r32":
-        inp = input("You beat me? Here's a r32 if you want it. (y/n)")
+        inp = input("Well, I don't really care the result. Here's a r32 if you want it. (y/n) ")
         if inp == "y":
             player["car"] = "skyline_r32"
     return player, enemies
@@ -125,7 +125,7 @@ def nikko(player, cars, enemies):
     turns = 20
     player, enemies = combat(turns, enemy, player, cars, enemies)
     if player["car"] != "cappuccino":
-        inp = input("You beat me? Here's a cappuccino if you want it. (y/n)")
+        inp = input("Well, I don't really care the result. Here's a cappuccino if you want it. (y/n) ")
         if inp == "y":
             player["car"] = "cappuccino"
     return player, enemies
@@ -139,7 +139,7 @@ def shomaru(player, cars, enemies):
     turns = 20
     player, enemies = combat(turns, enemy, player, cars, enemies)
     if player["car"] != "ek9_civic":
-        inp = input("You beat me? Here's a ek9 if you want it. (y/n)")
+        inp = input("Well, I don't really care the result. Here's a ek9 if you want it. (y/n) ")
         if inp == "y":
             player["car"] = "ek9_civic"
     return player, enemies
@@ -153,7 +153,7 @@ def tsuchisaka(player, cars, enemies):
     turns = 15
     player, enemies = combat(turns, enemy, player, cars, enemies)
     if player["car"] != "fd_rx7":
-        inp = input("You beat me? Here's a rx7 if you want it. (y/n)")
+        inp = input("Well, I don't really care the result. Here's a rx7 if you want it. (y/n) ")
         if inp == "y":
             player["car"] = "fd_rx7"
     return player, enemies
@@ -167,7 +167,7 @@ def nagao(player, cars, enemies):
     turns = 15
     player, enemies = combat(turns, enemy, player, cars, enemies)
     if player["car"] != "impreza":
-        inp = input("You beat me? Here's an impreza if you want it. (y/n)")
+        inp = input("Well, I don't really care the result. Here's an impreza if you want it. (y/n) ")
         if inp == "y":
             player["car"] = "impreza"
     return player, enemies
@@ -181,7 +181,7 @@ def haruna(player, cars, enemies):
     turns = 25
     player, enemies = combat(turns, enemy, player, cars, enemies)
     if player["car"] != "nsx_na1":
-        inp = input("You beat me? Here's a nsx if you want it. (y/n)")
+        inp = input("Well, I don't really care the result. Here's a nsx if you want it. (y/n) ")
         if inp == "y":
             player["car"] = "nsx_na1"
     return player, enemies
@@ -339,21 +339,21 @@ def main(player, cars, enemies):
         while goto != "akina" and goto != "akagi" and goto != "myogi" and goto != "usui" and goto != "nikko" and goto != "shomaru" and goto != "tsuchisaka" and goto != "nagao":
             goto = input("That's not a valid location, where would you like to go to?\n Your options are: akina, akagi, myogi, usui, nikko, shomaru, tsuchisaka, and nagao\n ").strip().lower()
         if goto == "akina":
-            player = akina(player, cars, enemies)
+            player, enemies = akina(player, cars, enemies)
         elif goto == "akagi":
-            player = akagi(player, cars, enemies)
+            player, enemies = akagi(player, cars, enemies)
         elif goto == "myogi":
-            player = myogi(player, cars, enemies)
+            player, enemies = myogi(player, cars, enemies)
         elif goto == "usui":
-            player = usui(player, cars, enemies)
+            player, enemies = usui(player, cars, enemies)
         elif goto == "nikko":
-            player = nikko(player, cars, enemies)
+            player, enemies = nikko(player, cars, enemies)
         elif goto == "shomaru":
-            player = shomaru(player, cars, enemies)
+            player, enemies = shomaru(player, cars, enemies)
         elif goto == "tsuchisaka":
-            player = tsuchisaka(player, cars, enemies)
+            player, enemies = tsuchisaka(player, cars, enemies)
         elif goto == "nagao":
-            player = nagao(player, cars, enemies)
+            player, enemies = nagao(player, cars, enemies)
     print("Thank you for playing.")
 
 print(f"These are your options for cars:")
