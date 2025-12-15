@@ -2,7 +2,6 @@ import curses
 import math
 import time
 
-# --- Helper functions ---
 def rotate_point(x, y, cx, cy, angle):
     s, c = math.sin(angle), math.cos(angle)
     nx = (x - cx) * c - (y - cy) * s + cx
@@ -27,7 +26,6 @@ def draw_rotated_car(stdscr, car_lines, center_x, center_y, angle):
             except curses.error:
                 pass
 
-# --- Grid system for walls ---
 def generate_grid(walls, width, height):
     grid = [[False]*width for _ in range(height)]
     for wall in walls:
@@ -66,7 +64,6 @@ def check_collision_grid(x, y, car_lines, angle, grid):
                 return True
     return False
 
-# --- HUD ---
 def draw_hud(stdscr, speed, fuel):
     hud_y, hud_x = stdscr.getmaxyx()
     hud_y -= 2
@@ -74,24 +71,20 @@ def draw_hud(stdscr, speed, fuel):
     stdscr.addstr(hud_y, hud_x, f"Speed: {speed:.1f}  ")
     stdscr.addstr(hud_y + 1, hud_x, f"Fuel: {fuel:.1f}  ")
 
-# --- Courses ---
 courses = [
-    [  # Course 1
+    [
         [(10,5), (10,15)],
         [(10,15), (30,15)],
         [(30,15), (30,5)],
         [(30,5), (10,5)]
     ],
-    [  # Course 2
+    [
         [(5,5),(5,20)],
         [(5,20),(40,20)],
         [(40,20),(40,5)],
         [(40,5),(5,5)]
     ]
 ]
-
-# --- Main game ---
-# --- Main game ---
 def car_game(stdscr):
     curses.curs_set(0)
     stdscr.nodelay(True)
@@ -109,7 +102,6 @@ def car_game(stdscr):
     car_width = max(len(line) for line in car_lines)
     car_height = len(car_lines)
 
-    # Safe starting position inside walls
     x = car_width // 2 + 25
     y = car_height // 2 + 25
 
@@ -117,7 +109,7 @@ def car_game(stdscr):
     speed = 0
     ROTATE_DELTA = 0.5
     ACCELERATION = 0.1
-    MAX_SPEED = 0.5
+    MAX_SPEED = 1
     FUEL_CONSUMPTION = 0.01
     fuel = 100.0
 
@@ -125,7 +117,6 @@ def car_game(stdscr):
     walls = courses[current_course]
     grid = generate_grid(walls, width, height)
 
-    # Add screen-edge walls
     for row in range(height):
         grid[row][0] = True
         grid[row][width-1] = True
@@ -133,7 +124,6 @@ def car_game(stdscr):
         grid[0][col] = True
         grid[height-1][col] = True
 
-    # Key state flags
     left_pressed = False
     right_pressed = False
     up_pressed = False
@@ -142,7 +132,6 @@ def car_game(stdscr):
     while True:
         key = stdscr.getch()
 
-        # Update key states
         if key != -1:
             if key in (ord('q'), 27):
                 break
@@ -164,7 +153,6 @@ def car_game(stdscr):
             up_pressed = False
             down_pressed = False
 
-        # Rotation based on key state, with collision check
         rotation_speed = 0
         if left_pressed:
             rotation_speed -= ROTATE_DELTA
@@ -175,45 +163,37 @@ def car_game(stdscr):
         if not check_collision_grid(x, y, car_lines, new_angle, grid):
             angle = new_angle
         else:
-            rotation_speed = 0  # prevent rotation into wall
+            rotation_speed = 0
 
-        # Acceleration / deceleration based on keys
         if up_pressed:
             speed = min(speed + ACCELERATION, MAX_SPEED)
         if down_pressed:
             speed = max(speed - ACCELERATION * 10, 0)
 
-        # Movement vector
         dx = math.sin(angle) * speed
         dy = -math.cos(angle) * speed
 
-        # Axis-aligned collision detection
         new_x = x + dx
         new_y = y + dy
 
-        # X direction
         if not check_collision_grid(new_x, y, car_lines, angle, grid):
             x = new_x
         else:
             dx = 0
 
-        # Y direction
         if not check_collision_grid(x, new_y, car_lines, angle, grid):
             y = new_y
         else:
             dy = 0
 
-        # Update speed and angle based on allowed movement
         speed = math.hypot(dx, dy)
         if speed > 0:
             angle = math.atan2(dx, -dy)
 
-        # Fuel consumption
         fuel = max(fuel - abs(speed) * FUEL_CONSUMPTION, 0)
         if fuel <= 0:
             speed = 0
 
-        # Draw everything
         stdscr.clear()
         draw_grid(stdscr, grid)
         draw_rotated_car(stdscr, car_lines, x, y, angle)

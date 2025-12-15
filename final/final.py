@@ -67,8 +67,12 @@ def akina(player, cars, enemies):
             akinas.append(e)
     enemy = random.choice(akinas)
     turns = 25
-    combat(turns, enemy, player, cars, enemies)
-    main(player, cars, enemies)
+    player, enemies = combat(turns, enemy, player, cars, enemies)
+    if player["car"] != "supra_rz":
+        inp = input("You beat me? Here's a supra if you want it. (y/n)")
+        if inp == "y":
+            player["car"] = "supra_rz"
+    return player, enemies
 def akagi(player, cars, enemies):
     print("Welcome to Mount Akagi.")
     akagis = []
@@ -77,8 +81,12 @@ def akagi(player, cars, enemies):
             akagis.append(e)
     enemy = random.choice(akagis)
     turns = 30
-    combat(turns, enemy, player, cars, enemies)
-    main(player, cars, enemies)
+    player, enemies = combat(turns, enemy, player, cars, enemies)
+    if player["car"] != "180sx":
+        inp = input("You beat me? Here's a 180sx if you want it. (y/n)")
+        if inp == "y":
+            player["car"] = "180sx"
+    return player, enemies
 def myogi(player, cars, enemies):
     print("Welcome to Mount Myogi.")
     myogis = []
@@ -87,8 +95,12 @@ def myogi(player, cars, enemies):
             myogis.append(e)
     enemy = random.choice(myogis)
     turns = 18
-    combat(turns, enemy, player, cars, enemies)
-    main(player, cars, enemies)
+    player, enemies = combat(turns, enemy, player, cars, enemies)
+    if player["car"] != "evo5":
+        inp = input("You beat me? Here's a evo if you want it. (y/n)")
+        if inp == "y":
+            player["car"] = "evo5"
+    return player, enemies
 def usui(player, cars, enemies):
     print("Welcome to Usui Pass.")
     usuis = []
@@ -97,8 +109,12 @@ def usui(player, cars, enemies):
             usuis.append(e)
     enemy = random.choice(usuis)
     turns = 50
-    combat(turns, enemy, player, cars, enemies)
-    main(player, cars, enemies)
+    player, enemies = combat(turns, enemy, player, cars, enemies)
+    if player["car"] != "skyline_r32":
+        inp = input("You beat me? Here's a r32 if you want it. (y/n)")
+        if inp == "y":
+            player["car"] = "skyline_r32"
+    return player, enemies
 def nikko(player, cars, enemies):
     print("Welcome to Mount Nikko.")
     nikkos = []
@@ -107,8 +123,12 @@ def nikko(player, cars, enemies):
             nikkos.append(e)
     enemy = random.choice(nikkos)
     turns = 20
-    combat(turns, enemy, player, cars, enemies)
-    main(player, cars, enemies)
+    player, enemies = combat(turns, enemy, player, cars, enemies)
+    if player["car"] != "cappuccino":
+        inp = input("You beat me? Here's a cappuccino if you want it. (y/n)")
+        if inp == "y":
+            player["car"] = "cappuccino"
+    return player, enemies
 def shomaru(player, cars, enemies):
     print("Welcome to Mount Shomaru.")
     shomarus = []
@@ -117,8 +137,12 @@ def shomaru(player, cars, enemies):
             shomarus.append(e)
     enemy = random.choice(shomarus)
     turns = 20
-    combat(turns, enemy, player, cars, enemies)
-    main(player, cars, enemies)
+    player, enemies = combat(turns, enemy, player, cars, enemies)
+    if player["car"] != "ek9_civic":
+        inp = input("You beat me? Here's a ek9 if you want it. (y/n)")
+        if inp == "y":
+            player["car"] = "ek9_civic"
+    return player, enemies
 def tsuchisaka(player, cars, enemies):
     print("Welcome to Mount Tsuchisaka.")
     tsuchisakas = []
@@ -127,8 +151,12 @@ def tsuchisaka(player, cars, enemies):
             tsuchisakas.append(e)
     enemy = random.choice(tsuchisakas)
     turns = 15
-    combat(turns, enemy, player, cars, enemies)
-    main(player, cars, enemies)
+    player, enemies = combat(turns, enemy, player, cars, enemies)
+    if player["car"] != "fd_rx7":
+        inp = input("You beat me? Here's a rx7 if you want it. (y/n)")
+        if inp == "y":
+            player["car"] = "fd_rx7"
+    return player, enemies
 def nagao(player, cars, enemies):
     print("Welcome to Mount Nagao.")
     nagaos = []
@@ -137,18 +165,26 @@ def nagao(player, cars, enemies):
             nagaos.append(e)
     enemy = random.choice(nagaos)
     turns = 15
-    combat(turns, enemy, player, cars, enemies)
-    main(player, cars, enemies)
+    player, enemies = combat(turns, enemy, player, cars, enemies)
+    if player["car"] != "impreza":
+        inp = input("You beat me? Here's an impreza if you want it. (y/n)")
+        if inp == "y":
+            player["car"] = "impreza"
+    return player, enemies
 def haruna(player, cars, enemies):
-    print("Welcome to Mount Akina.")
-    haruna = []
+    print("Welcome to Mount Haruna.")
+    harunas = []
     for e in enemies:
         if "Akina" == enemies[e]["track"]:
-            haruna.append(e)
-    enemy = random.choice(haruna)
+            harunas.append(e)
+    enemy = random.choice(harunas)
     turns = 25
-    combat(turns, enemy, player, cars, enemies)
-    main(player, cars, enemies)
+    player, enemies = combat(turns, enemy, player, cars, enemies)
+    if player["car"] != "nsx_na1":
+        inp = input("You beat me? Here's a nsx if you want it. (y/n)")
+        if inp == "y":
+            player["car"] = "nsx_na1"
+    return player, enemies
 
 def combat(turns, enemy, player, cars, enemies):
     if random.choice([0, 1]) == 0:
@@ -303,21 +339,21 @@ def main(player, cars, enemies):
         while goto != "akina" and goto != "akagi" and goto != "myogi" and goto != "usui" and goto != "nikko" and goto != "shomaru" and goto != "tsuchisaka" and goto != "nagao":
             goto = input("That's not a valid location, where would you like to go to?\n Your options are: akina, akagi, myogi, usui, nikko, shomaru, tsuchisaka, and nagao\n ").strip().lower()
         if goto == "akina":
-            akina(player, cars, enemies)
+            player = akina(player, cars, enemies)
         elif goto == "akagi":
-            akagi(player, cars, enemies)
+            player = akagi(player, cars, enemies)
         elif goto == "myogi":
-            myogi(player, cars, enemies)
+            player = myogi(player, cars, enemies)
         elif goto == "usui":
-            usui(player, cars, enemies)
+            player = usui(player, cars, enemies)
         elif goto == "nikko":
-            nikko(player, cars, enemies)
+            player = nikko(player, cars, enemies)
         elif goto == "shomaru":
-            shomaru(player, cars, enemies)
+            player = shomaru(player, cars, enemies)
         elif goto == "tsuchisaka":
-            tsuchisaka(player, cars, enemies)
+            player = tsuchisaka(player, cars, enemies)
         elif goto == "nagao":
-            nagao(player, cars, enemies)
+            player = nagao(player, cars, enemies)
     print("Thank you for playing.")
 
 print(f"These are your options for cars:")
