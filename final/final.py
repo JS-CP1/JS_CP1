@@ -326,7 +326,7 @@ def main(player, cars, enemies):
         elif act == "car":
             print(f"These are your options for cars:")
             for car in cars:
-                print(f" {car}; {car["price"]}")
+                print(f" {car}; {cars[car]['price']}")
             new_car = input("What car would you like? (make sure it's exactly the same) ").strip().lower()
             while new_car not in cars or player["money"] < cars[new_car]["price"]:
                 if new_car not in cars:
@@ -335,6 +335,7 @@ def main(player, cars, enemies):
                     new_car = input("You do not have enough money for that car. Choose again: ").strip().lower()
             print(f"You bought a(n) {new_car}")
             player["car"] = new_car
+            player["money"] -= cars[new_car]["price"]
         goto = input("Where would you like to go to?\n Your options are: akina, akagi, myogi, usui, nikko, shomaru, tsuchisaka, and nagao\n ").strip().lower()
         while goto != "akina" and goto != "akagi" and goto != "myogi" and goto != "usui" and goto != "nikko" and goto != "shomaru" and goto != "tsuchisaka" and goto != "nagao":
             goto = input("That's not a valid location, where would you like to go to?\n Your options are: akina, akagi, myogi, usui, nikko, shomaru, tsuchisaka, and nagao\n ").strip().lower()
